@@ -1,0 +1,153 @@
+name: Production Build and Push
+
+on:
+ push:
+  branches:
+   - master
+  # Скрипт сработает, только если изменения зашли в одну из этих папок или сам workflow
+  paths:
+   - "apps/frontend/**"
+   - "apps/backend/**"
+   - "caddy/**"
+   - ".github/workflows/deploy.yml"
+
+env:
+ REGISTRY: ghcr.io
+ IMAGE_BASE: ghcr.io/okiscape/vodka-bio
+
+jobs:
+ # ----------------------------------------------------
+ # 1. СБОРКА FRONTEND (NEXT.JS)
+ # ----------------------------------------------------
+ build-frontend:
+  runs-on: ubuntu-latest
+  permissions:
+   contents: read
+   packages: write
+  steps:
+   - name: Checkout repository
+     uses: actions/checkout@v4
+     with:
+      fetch-depth: 2 # Нужно, чтобы гиту было с чем сравнивать изменения
+
+   # Магия фильтрации: проверяем, изменилось ли что-то в папке фронта
+   - name: Check for Frontend changes
+     id: filter
+     uses: dorny/paths-filter@v3
+     with:
+      filters: |
+       src:
+         - 'apps/frontend/**'
+         - 'turbo.json'
+         - 'package.json'
+         - 'pnpm-lock.yaml'
+
+   - name: Set up Docker Buildx
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/setup-buildx-action@v3
+
+   - name: Log in to GHCR
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/login-action@v3
+     with:
+      registry: ${{ env.REGISTRY }}
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: Build and push Frontend
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/build-push-action@v5
+     with:
+      context: .
+      file: apps/frontend/Dockerfile
+      push: true
+      tags: ${{ env.IMAGE_BASE }}-frontend:latest
+
+ # ----------------------------------------------------
+ # 2. СБОРКА BACKEND
+ # ----------------------------------------------------
+ build-backend:
+  runs-on: ubuntu-latest
+  permissions:
+   contents: read
+   packages: write
+  steps:
+   - name: Checkout repository
+     uses: actions/checkout@v4
+     with:
+      fetch-depth: 2
+
+   - name: Check for Backend changes
+     id: filter
+     uses: dorny/paths-filter@v3
+     with:
+      filters: |
+       src:
+         - 'apps/backend/**'
+         - 'turbo.json'
+         - 'package.json'
+         - 'pnpm-lock.yaml'
+
+   - name: Set up Docker Buildx
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/setup-buildx-action@v3
+
+   - name: Log in to GHCR
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/login-action@v3
+     with:
+      registry: ${{ env.REGISTRY }}
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: Build and push Backend
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/build-push-action@v5
+     with:
+      context: .
+      file: apps/backend/Dockerfile # Поменяй путь, если у бэка другой Dockerfile
+      push: true
+      tags: ${{ env.IMAGE_BASE }}-backend:latest
+
+ # ----------------------------------------------------
+ # 3. СБОРКА CADDY
+ # ----------------------------------------------------
+ build-caddy:
+  runs-on: ubuntu-latest
+  permissions:
+   contents: read
+   packages: write
+  steps:
+   - name: Checkout repository
+     uses: actions/checkout@v4
+     with:
+      fetch-depth: 2
+
+   - name: Check for Caddy changes
+     id: filter
+     uses: dorny/paths-filter@v3
+     with:
+      filters: |
+       src:
+         - 'caddy/**'
+
+   - name: Set up Docker Buildx
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/setup-buildx-action@v3
+
+   - name: Log in to GHCR
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/login-action@v3
+     with:
+      registry: ${{ env.REGISTRY }}
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+
+   - name: Build and push Caddy
+     if: steps.filter.outputs.src == 'true'
+     uses: docker/build-push-action@v5
+     with:
+      context: ./caddy
+      file: ./caddy/Dockerfile
+      push: true
+      tags: ${{ env.IMAGE_BASE }}-caddy:latest
