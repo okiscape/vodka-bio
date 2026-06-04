@@ -1,0 +1,11 @@
+oki.vodka {
+ tls /etc/caddy/certs/org.pem /etc/caddy/certs/org.key
+
+ handle /api/* {
+  reverse_proxy vodka-backend:5000
+ }
+
+ handle {
+  reverse_proxy vodka-frontend:80
+ }
+}

@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  color: #fff;
+  background-color: #000;
+  font-family: "Montserrat Underline", sans-serif;
+  font-weight: 600;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+}
+
+h1 .aka {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  opacity: 0.5;
+}
+
+.shitpostgallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.shitpostgallery.content {
+  column-count: 3;
+  column-gap: 0.5rem;
+  width: 100%;
+}
+
+.shitpostgallery.content img {
+  max-width: 350px;
+  display: block;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+
+.mylinks {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.textcontainer {
+  width: 550px;
+  max-width: 100%;
+}
+
+.textcontainer .description {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.lmaowhat {
+  background: linear-gradient(to right, #7825dd, #feb454);
+  -webkit-background-clip: text;
+  color: #ffffff00;
+}
+
+.userbanner-space {
+  display: flex;
+  gap: 20px;
+}
+.userbanner {transition: all 0.2s;}
+.userbanner:hover {
+  transform: scale(1.3);
+}
+.userbanner.oguribanner:hover {
+  margin-left: 10px;
+  transition: all 0.5s;
+}
+
+.nowplaying-container {
+ display: flex; align-items: center; gap: 25px; margin-top: 20px; width: 100%;
+}
+.nowplaying-container .cover {max-width: 80px;}
+.nowplaying-container .title {font-size: 1.1rem;}
+.nowplaying-container .artist {opacity: 0.7; font-family: "Montserrat";}
+
+.spinningvideo {
+  width: 500px;
+  max-width: 100%;
+}
+
+.contentselector {display: flex; gap: 10px; color: rgba(255, 255, 255, 0.6)}
+.contentselector .active {color: #fff}
+
+@media (max-width: 1200px) {
+  .shitpostgallery.content {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .spinningvideo {
+    width: 340px;
+  }
+
+  .textcontainer {
+    width: 320px;
+  }
+  .shitpostgallery.content {
+    column-count: 2;
+  }
+  .shitpostgallery.content img { max-width: 200px;}
+}
+
+/* Мобильный */
+@media (max-width: 600px) {
+  .spinningvideo {
+    width: 220px;
+  }
+
+  .textcontainer {
+    width: 100%;
+    text-align: center;
+  }
+  .contentselector {justify-content: center;}
+
+  h1 {
+    font-size: 1.25rem;
+  }
+  .mylinks {
+    justify-content: center;
+  }
+
+  .shitpostgallery.content {
+    column-count: 1;
+  }
+  .shitpostgallery.content img { max-width: 200px;}
+}

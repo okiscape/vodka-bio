@@ -1,0 +1,57 @@
+services:
+ caddy:
+  image: ghcr.io/okiscape/vodka-bio-caddy:latest
+  restart: unless-stopped
+  container_name: vodka-caddy
+  ports:
+   - "80:80"
+   - "443:443"
+  volumes:
+   - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+   - ./caddy/certs:/etc/caddy/certs
+   - caddy_data:/data
+   - caddy_config:/config
+  depends_on:
+   - frontend
+   - backend
+
+ frontend:
+  image: ghcr.io/okiscape/vodka-bio-frontend:latest
+  restart: unless-stopped
+  container_name: vodka-frontend
+  environment:
+   NODE_ENV: ${NODE_ENV}
+   PORT: ${PORT_FRONTEND}
+   OTORING_SLUG: ${OTORING_SLUG}
+   GITHUB_REPO_URL: ${GITHUB_REPO_URL}
+   SENKODIGITAL_REFERRAL: ${SENKODIGITAL_REFERRAL}
+   API_BASEURL: ${API_BASEURL}
+
+ backend:
+  image: ghcr.io/okiscape/vodka-bio-backend:latest
+  restart: unless-stopped
+  container_name: vodka-backend
+  environment:
+   NODE_ENV: ${NODE_ENV}
+   PORT: ${PORT_BACKEND}
+   GITHUB_TOKEN: ${GITHUB_TOKEN}
+   ADMIN_TOKEN: ${API_ACCESS_TOKEN}
+   LASTFM_TOKEN: ${LASTFM_TOKEN}
+   LASTFM_USERNAME: ${LASTFM_USERNAME}
+  volumes:
+   - ./gallery:/app/gallery
+
+ watchtower:
+  image: containrrr/watchtower
+  restart: unless-stopped
+  container_name: vodka-watchtower
+  volumes:
+   - /var/run/docker.sock:/var/run/docker.sock
+   - ~/.docker/config.json:/config.json
+  command: --interval 60 --cleanup
+  environment:
+   - DOCKER_API_VERSION=1.40
+
+volumes:
+ caddy_data:
+ caddy_config:
