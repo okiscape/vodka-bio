@@ -16,9 +16,6 @@ env:
  IMAGE_BASE: ghcr.io/okiscape/vodka-bio
 
 jobs:
- # ----------------------------------------------------
- # 1. СБОРКА FRONTEND (NEXT.JS)
- # ----------------------------------------------------
  build-frontend:
   runs-on: ubuntu-latest
   permissions:
@@ -28,9 +25,7 @@ jobs:
    - name: Checkout repository
      uses: actions/checkout@v4
      with:
-      fetch-depth: 2 # Нужно, чтобы гиту было с чем сравнивать изменения
-
-   # Магия фильтрации: проверяем, изменилось ли что-то в папке фронта
+      fetch-depth: 2
    - name: Check for Frontend changes
      id: filter
      uses: dorny/paths-filter@v3

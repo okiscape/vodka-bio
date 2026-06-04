@@ -17,7 +17,7 @@ async function readMeta(): Promise<Record<string, { caption: string }>> {
     const raw = await readFile(METADATA_FILE, 'utf-8')
     return JSON.parse(raw)
   } catch {
-    return {}
+    return { }
   }
 }
 
