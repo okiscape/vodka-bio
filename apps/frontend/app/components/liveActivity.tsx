@@ -17,7 +17,7 @@ export default function App({ apiBaseUrl }: Props) {
  async function fetchState() {
   const _apiFetch = await fetch(`${apiBaseUrl}/scrobbles/nowplaying`)
   const apiFetch = await _apiFetch.json()
-  if (!apiFetch.track) return
+  if (!apiFetch.track || !apiFetch.track.nowplaying) return
 
   setNowPlaying({
    title: apiFetch.track.name,
@@ -37,7 +37,7 @@ export default function App({ apiBaseUrl }: Props) {
  return (
   <div>
    {nowPlaying &&
-    <a className="nowplaying-container" href={nowPlaying.url}>
+    <a className="nowplaying-container" href={nowPlaying.url} target="_blank">
      <img src={nowPlaying.cover} className="cover" />
      <div className="meta">
       <p className={`artist ${montserrat.className} mb-2`}>now playing</p>

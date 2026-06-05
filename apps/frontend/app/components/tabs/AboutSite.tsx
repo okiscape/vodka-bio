@@ -26,10 +26,10 @@ export default function AboutSite({ lastUpdate, senkoReferral, githubRepoUrl }: 
         <p>i have a LOT of ideas for this website, but i have a paws yk(itll be veryverysoon!)</p>
         <p>and holy god, its fully automatized with github actions, watchtower and docker with custom packages</p>
         <p>this is my first project with THAT automatization. i feel so proud of it</p>
-        <a className="my-1.5" href={githubRepoUrl}>gh repo</a>
+        <a className="my-1.5" href={githubRepoUrl} target='_blank'>gh repo</a>
         <p>last frontend update: {formatDate(lastUpdate.frontend)}</p>
         <p>last backend update: {formatDate(lastUpdate.backend)}</p>
-        <p className="mt-1.5">powerdby <a href={senkoReferral} className="lmaowhat">senko.digital</a></p>
+        <p className="mt-1.5">powerdby <a href={senkoReferral} className="lmaowhat" target='_blank'>senko.digital</a></p>
       </div>
     </div>
   )

@@ -58,7 +58,7 @@ async function App() {
     <p>my frens :lessthan::three:</p>
     <div className="userbanner-space">
     {banners.map((banner) => (
-      <a href={banner.href !== "me" ? banner.href : undefined} key={banner.name}>
+      <a href={banner.href !== "me" ? banner.href : undefined} key={banner.name} target="_blank">
         <img className="userbanner" src={banner.url} alt={banner.name} title={banner.name} />
       </a>
     ))}

@@ -32,7 +32,7 @@ export default function AboutMe({ apiBaseUrl }: Props) {
       </div>
       <div className="mylinks">
        {myLinks.map((link) => (
-        <a href={link.href} key={link.name}>
+        <a href={link.href} key={link.name} target='_blank'>
          {link.name}
         </a>
        ))}
