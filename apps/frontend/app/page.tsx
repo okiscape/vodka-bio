@@ -2,22 +2,18 @@ export const dynamic = 'force-dynamic'
 
 import "./globals.css";
 import { Montserrat_Underline } from 'next/font/google'
-import CopyBanner from "./components/copyBanner";
 import TabSelector from "./components/tabSelector"
 import ShitpostGallery from "./components/shitpostGallery"
+import Banners from "./components/banners"
 
 const montserratUnderline = Montserrat_Underline({
   weight: '500',
   subsets: ['latin'],
 })
 
-
-const banners = [
- { url: "/banners/c1oudy.png", name: "c1oudy bunnyer", href: "https://c1oudy.otlegacy.com" },
-]
-
 async function App() {
  console.log('OTORING_SLUG:', process.env.OTORING_SLUG)
+
  const _otoringFetch = await fetch(`https://webring.otomir23.me/${process.env.OTORING_SLUG}/data`, {
   next: { revalidate: 3600*6 },
  })
@@ -37,6 +33,7 @@ async function App() {
    backend: lastupdateJson.lastUpdates.backend,
  }
 
+
  return (
   <body className={montserratUnderline.className}>
    <div className="flex flex-wrap justify-center items-center gap-10">
@@ -49,21 +46,7 @@ async function App() {
    </div>
    <ShitpostGallery apiBaseUrl={process.env.API_BASEURL!} />
 
-   <div className="flex items-center gap-1">
-    <p>My banner, ORUGIBANNER - </p>
-    <CopyBanner url="/banners/okiscape.gif" title="my banner!!! click to copy!"
-     name="okiscape banner" alt="okiscape banner" />
-   </div>
-   <div className="flex flex-col items-center gap-2">
-    <p>my frens :lessthan::three:</p>
-    <div className="userbanner-space">
-    {banners.map((banner) => (
-      <a href={banner.href !== "me" ? banner.href : undefined} key={banner.name} target="_blank">
-        <img className="userbanner" src={banner.url} alt={banner.name} title={banner.name} />
-      </a>
-    ))}
-    </div>
-   </div>
+   <Banners apiBaseUrl={process.env.API_BASEURL!}/>
    <div className="gap-5 flex opacity-55">
     <a href={otoringFetch?.prev?.url}> {otoringFetch?.prev?.name || '[not found]'} </a>
     <a href="https://webring.otomir23.me/"> otoring </a>

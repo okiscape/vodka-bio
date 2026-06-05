@@ -71,14 +71,22 @@ h1 .aka {
 
 .userbanner-space {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 900px;
+  column-gap: 10px;
+  row-gap: 5px;
+  min-height: 150px;
+  align-items: center;
 }
-.userbanner {transition: all 0.2s;}
+.userbanner {transition: all 0.4s; max-width: 500px;}
+
 .userbanner:hover {
-  transform: scale(1.3);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #000;
 }
+
 .userbanner.oguribanner:hover {
-  margin-left: 10px;
   transition: all 0.5s;
 }
 

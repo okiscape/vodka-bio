@@ -29,7 +29,7 @@ build
 .docker
 caddy_data/
 caddy_config/
-gallery
+store
 
 .env
 .env.local

@@ -6,7 +6,8 @@ type Props = {
   url: string
   name: string
   title: string
-  alt:string
+  alt: string
+
 }
 
 export default function CopyBanner({ url, name, alt, title }: Props) {
@@ -14,7 +15,7 @@ export default function CopyBanner({ url, name, alt, title }: Props) {
 
   function handleClick() {
     navigator.clipboard.writeText(
-      `<img src="${window.location.origin}${url}" alt="${alt}" title="${name}" />`
+      `<img src="${url}" alt="${alt}" title="${name}" />`
     )
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)

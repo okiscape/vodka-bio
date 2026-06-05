@@ -11,6 +11,7 @@ import status from './routes/status.routes.js'
 import github from './routes/github.routes.js'
 import gallery from './routes/gallery.routes.js'
 import scrobbles from './routes/scrobbles.routes.js'
+import banners from './routes/banners.routes.js'
 
 const server = fastify()
 
@@ -40,6 +41,7 @@ server.register(status)
 server.register(github)
 server.register(gallery)
 server.register(scrobbles)
+server.register(banners)
 
 server.listen({ port: Number(process.env.PORT), host: process.env.HOST ?? '0.0.0.0' }, (err, address) => {
   if (err) {

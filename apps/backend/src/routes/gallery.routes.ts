@@ -4,7 +4,7 @@ import { readdir, unlink, stat, readFile, writeFile } from 'fs/promises'
 import { join } from 'path'
 import { pipeline } from 'stream/promises'
 
-const GALLERY_DIR = process.env.GALLERY_DIR ?? '/app/gallery'
+const GALLERY_DIR = process.env.GALLERY_DIR ?? '/app/store/gallery'
 
 if (!existsSync(GALLERY_DIR)) {
   mkdirSync(GALLERY_DIR, { recursive: true })

@@ -39,7 +39,7 @@ services:
    LASTFM_TOKEN: ${LASTFM_TOKEN}
    LASTFM_USERNAME: ${LASTFM_USERNAME}
   volumes:
-   - ./gallery:/app/gallery
+   - ./store:/app/store
 
  watchtower:
   image: containrrr/watchtower
