@@ -12,7 +12,7 @@ if (!existsSync(BANNERS_DIR)) {
 
 const METADATA_FILE = join(BANNERS_DIR, 'metadata.json')
 
-async function readMeta(): Promise<Record<string, { caption: string, href: string }>> {
+async function readMeta(): Promise<Record<string, { caption: string | undefined, href: string | undefined }>> {
   try {
     const raw = await readFile(METADATA_FILE, 'utf-8')
     return JSON.parse(raw)
@@ -21,7 +21,7 @@ async function readMeta(): Promise<Record<string, { caption: string, href: strin
   }
 }
 
-async function writeMeta(meta: Record<string, { caption: string, href: string }>) {
+async function writeMeta(meta: Record<string, { caption: string | undefined, href: string | undefined }>) {
   await writeFile(METADATA_FILE, JSON.stringify(meta, null, 2))
 }
 
@@ -48,22 +48,24 @@ fastify.post('/api/banners', async (request, reply) => {
   const part = await request.file()
   if (!part) return reply.status(400).send({ ok: false, message: 'No file' })
 
-  const safeName = `${Date.now()}-${part.filename.replace(/[^a-zA-Z0-9._-]/g, '_')}`
+  const safeName = `${part.filename.replace(/[^a-zA-Z0-9._-]/g, '_')}`
   await pipeline(part.file, createWriteStream(join(BANNERS_DIR, safeName)))
 
   const captionField = part.fields?.caption
   const caption = captionField && !Array.isArray(captionField) && captionField.type === 'field'
     ? captionField.value as string
-    : ''
+    : null
 
   const hrefField = part.fields?.href
   const href = hrefField && !Array.isArray(hrefField) && hrefField.type === 'field'
     ? hrefField.value as string
-    : ''
+    : null
 
-  const meta = await readMeta()
-  meta[safeName] = { caption, href }
-  await writeMeta(meta)
+ if (href || caption) {
+    let meta = await readMeta()
+    meta[safeName] = { href: href ?? undefined, caption: caption ?? undefined }
+    await writeMeta(meta)
+  }
 
   return {
     ok: true,
