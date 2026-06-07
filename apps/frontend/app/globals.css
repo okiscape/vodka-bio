@@ -1,11 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Montserrat Underline';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserratunderline/v3/mFTuWaYfw6zH4dthXcyms01NtC8I_7U5uS4uzII.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 
 body {
   margin: 0;
   color: #fff;
   background-color: #000;
-  font-family: "Montserrat Underline", sans-serif;
-  font-weight: 600;
+  font-family: "Montserrat Underline","Montserrat", sans-serif;
+  font-weight: 500;
   gap: 40px;
   display: flex;
   flex-direction: column;
@@ -14,6 +25,13 @@ body {
   min-height: 100vh;
   padding: 1.5rem;
   box-sizing: border-box;
+}
+
+.header-container {
+ position: fixed;
+ top: 15px;
+ font-weight: 500;
+ font-family: "Montserrat";
 }
 
 h1 {
@@ -105,6 +123,11 @@ h1 .aka {
 .contentselector {display: flex; gap: 10px; color: rgba(255, 255, 255, 0.6)}
 .contentselector .active {color: #fff}
 
+.not-found-container {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 1200px) {
   .shitpostgallery.content {
     column-count: 2;
@@ -129,6 +152,11 @@ h1 .aka {
 @media (max-width: 600px) {
   .spinningvideo {
     width: 220px;
+  }
+  .not-found-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .textcontainer {
