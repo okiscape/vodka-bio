@@ -38,7 +38,7 @@ export default function App({ apiBaseUrl }: Props) {
   <div>
    {nowPlaying &&
     <a className="nowplaying-container" href={nowPlaying.url} target="_blank">
-     <img src={nowPlaying.cover} className="cover" />
+     {nowPlaying.cover && <img src={nowPlaying.cover} className="cover" />}
      <div className="meta">
       <p className={`artist ${montserrat.className} mb-2`}>now playing</p>
       <p className="title">{nowPlaying.title}</p>

@@ -5,9 +5,9 @@ import { Montserrat_Underline } from 'next/font/google'
 import TabSelector from "./components/tabSelector"
 import ShitpostGallery from "./components/shitpostGallery"
 import Banners from "./components/banners"
+import Header from "./components/header";
 
 const montserratUnderline = Montserrat_Underline({
-  weight: '500',
   subsets: ['latin'],
 })
 
@@ -36,6 +36,7 @@ async function App() {
 
  return (
   <body className={montserratUnderline.className}>
+   <Header/>
    <div className="flex flex-wrap justify-center items-center gap-10">
     <video src="/videos/spinning.mp4" autoPlay loop className="spinningvideo" />
     <TabSelector lastUpdate={lastUpdateProps}
