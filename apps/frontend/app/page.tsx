@@ -45,9 +45,8 @@ async function App() {
      apiBaseUrl={process.env.API_BASEURL!}
     />
    </div>
-   <ShitpostGallery apiBaseUrl={process.env.API_BASEURL!} />
 
-   <Banners apiBaseUrl={process.env.API_BASEURL!}/>
+   <Banners apiBaseUrl={process.env.API_BASEURL!} />
    <div className="gap-5 flex opacity-55">
     <a href={otoringFetch?.prev?.url}> {otoringFetch?.prev?.name || '[not found]'} </a>
     <a href="https://webring.otomir23.me/"> otoring </a>
