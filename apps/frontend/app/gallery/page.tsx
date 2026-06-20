@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 export default async function App() {
  const _shitpostsFetch = await fetch(`${process.env.API_BASEURL}/gallery`)
  const galleryFetch = await _shitpostsFetch.json() as {items:{source: string, caption: string}[]}

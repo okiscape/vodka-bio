@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic'
 import "./globals.css";
 import { Montserrat_Underline } from 'next/font/google'
 import TabSelector from "./components/tabSelector"
-import ShitpostGallery from "./components/shitpostGallery"
 import Banners from "./components/banners"
 import Header from "./components/header";
 
