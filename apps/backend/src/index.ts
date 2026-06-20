@@ -22,7 +22,7 @@ server.addHook('preHandler', async (request, reply) => {
 
   const auth = request.headers['authorization']
 
-  if (!auth || auth !== `Bearer ${process.env.ADMIN_TOKEN}`) {
+  if (!auth || auth !== `Bearer ${process.env.API_TOKEN}`) {
     return reply.status(401).send({ ok: false, message: 'Unauthorized' })
   }
 })
