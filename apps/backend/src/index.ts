@@ -10,8 +10,11 @@ import root from './routes/root.routes.js'
 import status from './routes/status.routes.js'
 import github from './routes/github.routes.js'
 import gallery from './routes/gallery.routes.js'
+import ratings from './routes/ratings.routes.js'
 import scrobbles from './routes/scrobbles.routes.js'
 import banners from './routes/banners.routes.js'
+
+import { initDb } from './db/index.js'
 
 const server = fastify()
 
@@ -22,7 +25,7 @@ server.addHook('preHandler', async (request, reply) => {
 
   const auth = request.headers['authorization']
 
-  if (!auth || auth !== `Bearer ${process.env.API_TOKEN}`) {
+  if (!auth || auth !== `Bearer ${process.env.ADMIN_TOKEN}`) {
     return reply.status(401).send({ ok: false, message: 'Unauthorized' })
   }
 })
@@ -40,13 +43,25 @@ server.register(root)
 server.register(status)
 server.register(github)
 server.register(gallery)
-server.register(scrobbles)
+server.register(ratings)
 server.register(banners)
+server.register(scrobbles)
 
-server.listen({ port: Number(process.env.PORT), host: process.env.HOST ?? '0.0.0.0' }, (err, address) => {
-  if (err) {
-    console.error(err)
-    process.exit(1)
+const start = async () => {
+  try {
+    await initDb()
+  } catch (err) {
+    console.error('Failed to connect to database:', err)
+    console.log('Server will start without database — ratings API will be unavailable')
   }
-  console.log(`Server listening at ${address}`)
-})
+
+  server.listen({ port: Number(process.env.PORT), host: process.env.HOST ?? '0.0.0.0' }, (err, address) => {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+    console.log(`Server listening at ${address}`)
+  })
+}
+
+start()

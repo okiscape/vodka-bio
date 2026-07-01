@@ -1,6 +1,7 @@
 const roots = [
  {name: "main", href: "/"},
  {name: "gallery", href: "/gallery"},
+ {name: "ratings", href: "/ratings"},
 ]
 
 export default function Header() {
