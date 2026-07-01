@@ -1,6 +1,12 @@
+import { Montserrat } from 'next/font/google'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
+
+const montserrat = Montserrat({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 interface Score {
   name: string
@@ -67,7 +73,7 @@ export default async function Page() {
                     <span className="recent">recently updated</span>
                   )}
                 </div>
-                {item.summary && <p className="summary">{item.summary}</p>}
+                {item.summary && <p className={`summary ` + montserrat.className}>{item.summary}</p>}
                 <div className="footer">
                   <p>Avr. rating: {(item.scores.map((val, _, __) => (val.value))
                     .reduce((partialSum, a) => partialSum + a, 0) / item.scores.length).toFixed(1)} </p>

@@ -47,7 +47,7 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
   function startEdit(item: RatingItem) {
     setEditing({
       title: item.title,
-      scores: item.scores.map(s => ({ ...s })),
+      scores: item.scores.map(s => ({ name: s.name ?? '', value: s.value ?? 0, max: s.max ?? 10 })),
       banner: item.banner,
       summary: item.summary || '',
       description: item.description || '',

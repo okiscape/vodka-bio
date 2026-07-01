@@ -3,7 +3,7 @@ import { query } from '../db/index.js'
 
 interface RatingBody {
   title?: string
-  scores?: { name: string; value: number; max: number }[]
+  scores?: { name: string; value: number; max?: number }[]
   banner?: string
   summary?: string
   description?: string
