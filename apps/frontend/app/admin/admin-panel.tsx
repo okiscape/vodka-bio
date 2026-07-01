@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import GalleryTab from "./tabs/gallery-tab"
-import BannersTab from "./tabs/banners-tab"
-import RatingsTab from "./tabs/ratings-tab"
+import GalleryTab from "./tabs/gallery"
+import BannersTab from "./tabs/banners"
+import RatingsTab from "./tabs/ratings"
 
 type Props = {
   apiBaseUrl: string
@@ -57,7 +57,7 @@ export default function AdminPanel({ apiBaseUrl }: Props) {
 
   if (!token) {
     return (
-      <div className="flex flex-col items-center mt-30 gap-4">
+      <div className="flex flex-col items-center mt-5 gap-4">
         <p className="text-2xl">admin panel</p>
         <input
           className="px-4 py-2 w-80 text-sm font-mono text-center"
@@ -73,7 +73,7 @@ export default function AdminPanel({ apiBaseUrl }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center mt-30 w-full max-w-5xl px-4 self-center">
+    <div className="flex flex-col items-center w-full max-w-5xl px-4 self-center">
       <div className="w-full flex items-center justify-between mb-6">
         <p className="text-2xl">admin panel</p>
         <button className="text-xs opacity-40 hover:opacity-100" onClick={clearToken}>logout</button>
