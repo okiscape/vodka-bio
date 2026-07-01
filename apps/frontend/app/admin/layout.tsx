@@ -1,6 +1,5 @@
 import Header from "../components/header";
 import "../globals.css";
-import "./ratings.css"
 
 export default function RootLayout({
   children,
@@ -11,7 +10,10 @@ export default function RootLayout({
     <html
       lang="en"
       className="h-full antialiased"
-   >
+		>
+			<head>
+				<title>okiscape: admin</title>
+			</head>
     <body>
      <Header/>
      {children}

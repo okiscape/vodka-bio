@@ -13,6 +13,7 @@ import gallery from './routes/gallery.routes.js'
 import ratings from './routes/ratings.routes.js'
 import scrobbles from './routes/scrobbles.routes.js'
 import banners from './routes/banners.routes.js'
+import admin from './routes/admin.routes.js'
 
 import { initDb } from './db/index.js'
 
@@ -31,7 +32,9 @@ server.addHook('preHandler', async (request, reply) => {
 })
 
 server.register(cors, {
- origin: ['https://oki.vodka', 'http://localhost:3000']
+  origin: ['https://oki.vodka', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Authorization', 'Content-Type'],
 })
 server.register(staticFiles, { root: '/data/gallery', prefix: '/api/gallery/file/' })
 server.register(multipart, {
@@ -45,6 +48,7 @@ server.register(github)
 server.register(gallery)
 server.register(ratings)
 server.register(banners)
+server.register(admin)
 server.register(scrobbles)
 
 const start = async () => {
