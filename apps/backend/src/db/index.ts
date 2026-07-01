@@ -26,10 +26,14 @@ export async function initDb() {
         title TEXT NOT NULL,
         scores JSONB NOT NULL DEFAULT '[]'::jsonb,
         banner TEXT,
+        summary TEXT,
         description TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
+    `)
+    await client.query(`
+      ALTER TABLE ratings ADD COLUMN IF NOT EXISTS summary TEXT;
     `)
     console.log('Database initialized')
   } finally {

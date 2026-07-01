@@ -14,8 +14,21 @@ interface RatingItem {
 	title: string
 	scores: Score[]
 	banner: string | null
+	summary: string | null
 	description: string | null
 	created_at: string
+	updated_at: string
+}
+
+function fmtDate(iso: string) {
+	const d = new Date(iso)
+	return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+}
+
+function isRecent(iso: string) {
+	const d = new Date(iso)
+	const now = new Date()
+	return (now.getTime() - d.getTime()) < 3 * 24 * 60 * 60 * 1000
 }
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
@@ -31,15 +44,25 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 		&lt;- back to ratings
 		</Link>
 		<article className="w-full px-4 pb-20 flex gap-12">
-			<div className='w-4xs'>
+			<div className='w-96'>
 				{item.banner && (
 					<img
 						src={item.banner}
 						alt={item.title}
-						className="w-full h-64 object-cover mb-6"
+						className="w-xl h-64 object-cover mb-6"
 					/>
 				)}
-				<p className="text-5xl mb-4">{item.title}</p>
+				<div className="flex items-center gap-3 mb-4">
+					<p className="text-5xl ">{item.title}</p>
+					{isRecent(item.updated_at) && (
+						<span className="text-xs shadow-yellow-300 text-yellow-400 mt-2">recently updated</span>
+					)}
+				</div>
+				<div className="flex gap-4 text-xs opacity-40 mb-4">
+					<p>created {fmtDate(item.created_at)}</p>
+					<p>updated {fmtDate(item.updated_at)}</p>
+				</div>
+				{item.summary && <p className="text-sm opacity-70 mb-4 italic">{item.summary}</p>}
 				{item.scores.length > 0 && (
 					<div className="flex flex-wrap gap-5 mb-6">
 						{item.scores.map((s, i) => (
@@ -59,7 +82,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 			</div>
 			{item.description && (
 				<div
-					className="prose prose-invert max-w-none w-96"
+					className="prose prose-invert max-w-none w-2xl"
 					dangerouslySetInnerHTML={{ __html: item.description }}
 				/>
 			)}
