@@ -54,6 +54,8 @@ services:
         image: postgres:17-alpine
         restart: unless-stopped
         container_name: vodka-postgres
+        ports:
+            - "${DB_PORT:-5432}:5432"
         environment:
             POSTGRES_DB: ${DB_NAME}
             POSTGRES_USER: ${DB_USER}
