@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import "../globals.css";
-import "./ratings.css"
+import "./list.css"
 
 export default function RootLayout({
   children,

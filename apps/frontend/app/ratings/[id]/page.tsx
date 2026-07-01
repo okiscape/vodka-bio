@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import './article.css'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,39 +40,39 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const item = data.item
 
   return (
-    <div className="rating-page">
-      <Link href="/ratings" className="rating-back">
+    <div className="rating">
+      <Link href="/ratings" className="back">
         &lt;- back to ratings
       </Link>
-      <div className="rating-article">
-        <div className="rating-meta">
+      <div className="article">
+        <div className="meta">
           {item.banner && (
             <img
               src={item.banner}
               alt={item.title}
-              className="rating-banner"
+              className="banner"
             />
           )}
-          <div className="rating-title-row">
-            <p className="rating-title">{item.title}</p>
+          <div className="title-row">
+            <p className="title">{item.title}</p>
             {isRecent(item.updated_at) && (
-              <p className="rating-recent">recently updated</p>
+              <p className="recent">recently updated</p>
             )}
           </div>
-          <div className="rating-dates">
+          <div className="dates">
             <p>created {fmtDate(item.created_at)}</p>
             {item.created_at != item.updated_at && <p>updated {fmtDate(item.updated_at)}</p>}
           </div>
-          {item.summary && <p className="rating-summary">{item.summary}</p>}
+          {item.summary && <p className="summary">{item.summary}</p>}
           {item.scores.length > 0 && (
-            <div className="rating-scores">
+            <div className="scores">
               {item.scores.map((s, i) => (
                 <div key={i}>
-                  <div className="rating-score-name">{s.name}</div>
-                  <div className="rating-score-value">
+                  <div className="score-name">{s.name}</div>
+                  <div className="score-value">
                     {s.value}
                     {s.max &&
-                      <span className="rating-score-max">
+                      <span className="score-max">
                         <span className="sep">/</span>{s.max}
                       </span>}
                   </div>
@@ -82,7 +83,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         </div>
         {item.description && (
           <div
-            className="rating-description"
+            className="description"
             dangerouslySetInnerHTML={{ __html: item.description }}
           />
         )}

@@ -1,0 +1,120 @@
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.rating .back {
+  align-self: flex-start;
+  margin: 2rem 0 1rem 1rem;
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+.rating .back:hover {
+  opacity: 1;
+}
+
+.rating .article {
+  width: 100%;
+  padding: 0 1rem 5rem;
+}
+
+.rating .meta {
+  width: 24rem;
+  margin-bottom: 2rem;
+}
+
+.rating .banner {
+  width: 100%;
+  height: 16rem;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.rating .title-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.rating .title {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.rating .recent {
+  font-size: 0.75rem;
+  color: #facc15;
+}
+
+.rating .dates {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  margin-bottom: 1rem;
+}
+
+.rating .summary {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.rating .scores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.rating .score-name {
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+.rating .score-value {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.rating .score-max {
+  font-size: 0.875rem;
+  opacity: 0.4;
+  font-weight: 400;
+}
+.rating .score-max .sep {
+  margin-left: 0.5rem;
+}
+
+.rating .description {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .rating .article {
+    display: flex;
+    gap: 3rem;
+  }
+  .rating .meta {
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .rating .meta {
+    width: 100%;
+  }
+  .rating .banner {
+    height: 12rem;
+  }
+}
