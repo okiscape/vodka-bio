@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,7 +21,7 @@ interface RatingItem {
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const res = await fetch(`${process.env.API_BASEURL}/ratings/${id}`)
-  if (!res.ok) return <div className="text-center mt-30 text-2xl">not found</div>
+  if (!res.ok) return redirect("/404")
   const data = await res.json() as { item: RatingItem }
   const item = data.item
 

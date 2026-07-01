@@ -36,7 +36,7 @@ server.register(cors, {
 server.register(staticFiles, { root: '/data/gallery', prefix: '/api/gallery/file/' })
 server.register(multipart, {
   limits: {
-    fileSize: 50 * 1024 * 1024 // 50mb
+    fileSize: 50 * 1024 * 1024
   }
 })
 server.register(root)
@@ -52,7 +52,7 @@ const start = async () => {
     await initDb()
   } catch (err) {
     console.error('Failed to connect to database:', err)
-    console.log('Server will start without database — ratings API will be unavailable')
+    console.log('Server will start without database - ratings API will be unavailable')
   }
 
   server.listen({ port: Number(process.env.PORT), host: process.env.HOST ?? '0.0.0.0' }, (err, address) => {
