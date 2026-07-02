@@ -8,6 +8,8 @@ const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
 })
 
+export const dynamic = 'force-dynamic'
+
 async function App() {
  const _otoringFetch = await fetch(`https://webring.otomir23.me/${process.env.OTORING_SLUG}/data`, {
   next: { revalidate: 3600*6 },
