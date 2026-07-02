@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import {getRating, isRecent} from "./funcs"
 import { RatingItem } from './types'
 
-export const dynamic = 'force-dynamic'
 
 const montserrat = Montserrat({
   weight: '400',
@@ -26,7 +25,7 @@ export default function Page() {
 
 	async function fetchRatings() {
 		try {
-			const res = await getRating(process.env.API_BASEURL!)
+			const res = await getRating(process.env.API_BASEURL)
 			setApiAlive(res != null)
 
 			const data = res.items
@@ -50,7 +49,8 @@ export default function Page() {
     );
   }
 
-  return (
+	return (
+		process.env.API_BASEURL &&
     <div className="ratings-page">
       <p className="ratings-heading">ratings!</p>
       <p className="ratings-subtitle">things that.. i have opinion about</p>

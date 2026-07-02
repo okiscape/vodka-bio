@@ -5,9 +5,10 @@ import { getRating } from '../funcs'
 
 export async function generateMetadata(
   { params }: { params: Promise<{ id: string }> }
-): Promise<Metadata> {
+): Promise<Metadata | null> {
 	const { id } = await params
-	const ratings = await getRating(process.env.API_BASEURL!, id)
+	if (!process.env.API_BASEURL) return null
+	const ratings = await getRating(process.env.API_BASEURL, id)
 
   if (!ratings.item) {
     return { title: 'Not found' }

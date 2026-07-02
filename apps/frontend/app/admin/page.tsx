@@ -6,6 +6,6 @@ import "./admin.css"
 
 export default function Page() {
   return (
-    <AdminPanel apiBaseUrl={process.env.API_BASEURL!} />
+    <AdminPanel apiBaseUrl={process.env.API_BASEURL} />
   )
 }
