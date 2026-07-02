@@ -30,8 +30,11 @@ export default function Page() {
 			setApiAlive(res != null)
 
 			const data = res.items
-			setFetchedRatings(data)
-			setAllTags(Array.from(new Set(data.flatMap((r: RatingItem) => r.tags || []))))		}
+			if (data) {
+				setFetchedRatings(data)
+				setAllTags(Array.from(new Set(data.flatMap((r: RatingItem) => r.tags || []))))
+			}
+		}
 		catch { }
   }
 
