@@ -35,6 +35,9 @@ export async function initDb() {
     await client.query(`
       ALTER TABLE ratings ADD COLUMN IF NOT EXISTS summary TEXT;
     `)
+    await client.query(`
+      ALTER TABLE ratings ADD COLUMN IF NOT EXISTS tags TEXT[];
+    `)
     console.log('Database initialized')
   } finally {
     client.release()

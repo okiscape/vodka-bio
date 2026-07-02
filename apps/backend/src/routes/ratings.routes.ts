@@ -5,14 +5,15 @@ interface RatingBody {
   title?: string
   scores?: { name: string; value: number; max?: number }[]
   banner?: string
-  summary?: string
+	summary?: string
+  tags?: string[]
   description?: string
 }
 
 async function routes(fastify: FastifyInstance) {
   fastify.get('/api/ratings', async (request, reply) => {
     const result = await query(
-      'SELECT id, title, scores, banner, summary, description, created_at, updated_at FROM ratings ORDER BY created_at DESC'
+      'SELECT id, title, banner, summary, scores, description, tags, created_at, updated_at FROM ratings ORDER BY created_at DESC'
     )
     return { ok: true, items: result.rows }
   })
@@ -22,7 +23,7 @@ async function routes(fastify: FastifyInstance) {
     async (request, reply) => {
       const { id } = request.params
     const result = await query(
-      'SELECT id, title, scores, banner, summary, description, created_at, updated_at FROM ratings WHERE id = $1',
+      'SELECT id, title, scores, banner, summary, description, created_at, updated_at, tags FROM ratings WHERE id = $1',
       [id]
     )
       if (result.rows.length === 0) {
@@ -39,10 +40,10 @@ async function routes(fastify: FastifyInstance) {
     }
 
     const result = await query(
-      `INSERT INTO ratings (title, scores, banner, summary, description)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, title, scores, banner, summary, description, created_at, updated_at`,
-      [body.title, JSON.stringify(body.scores ?? []), body.banner ?? null, body.summary ?? null, body.description ?? null]
+      `INSERT INTO ratings (title, scores, banner, summary, description, tags)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING id, title, scores, banner, summary, description, created_at, updated_at, tags`,
+      [body.title, JSON.stringify(body.scores ?? []), body.banner ?? null, body.summary ?? null, body.description ?? null, body.tags ?? null]
     )
 
     return { ok: true, saved: result.rows[0] }
@@ -55,7 +56,7 @@ async function routes(fastify: FastifyInstance) {
       const body = request.body as RatingBody
 
       const existing = await query(
-        'SELECT id, title, scores, banner, summary, description FROM ratings WHERE id = $1',
+        'SELECT id, title, scores, banner, tags, summary, description FROM ratings WHERE id = $1',
         [id]
       )
       if (existing.rows.length === 0) {
@@ -67,13 +68,14 @@ async function routes(fastify: FastifyInstance) {
       const scores = JSON.stringify(body.scores ?? cur.scores)
       const banner = body.banner !== undefined ? body.banner : cur.banner
       const summary = body.summary !== undefined ? body.summary : cur.summary
+      const tags = JSON.stringify(body.tags ?? cur.tags)
       const description = body.description !== undefined ? body.description : cur.description
 
       const result = await query(
-        `UPDATE ratings SET title = $1, scores = $2, banner = $3, summary = $4, description = $5, updated_at = NOW()
+        `UPDATE ratings SET title = $1, scores = $2, banner = $3, summary = $4, description = $5, tags = $6, updated_at = NOW()
          WHERE id = $6
-         RETURNING id, title, scores, banner, summary, description, created_at, updated_at`,
-        [title, scores, banner, summary, description, id]
+         RETURNING id, title, scores, banner, summary, description, created_at, updated_at, tags`,
+        [title, scores, banner, summary, description, id, tags]
       )
 
       return { ok: true, saved: result.rows[0] }
