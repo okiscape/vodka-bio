@@ -14,7 +14,8 @@ interface RatingItem {
   summary: string | null
   description: string | null
   created_at: string
-  updated_at: string
+	updated_at: string
+  tags: string[]
 }
 
 export default function RatingsList({ items, onNew, onEdit, onRemove }: {

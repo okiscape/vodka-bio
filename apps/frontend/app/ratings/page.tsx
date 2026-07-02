@@ -3,6 +3,7 @@
 import { Montserrat } from 'next/font/google'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import {isRecent} from "./funcs"
 
 export const dynamic = 'force-dynamic'
 
@@ -30,13 +31,7 @@ interface RatingItem {
 
 function fmtDate(iso: string) {
   const d = new Date(iso)
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-}
-
-function isRecent(iso: string) {
-  const d = new Date(iso)
-  const now = new Date()
-  return (now.getTime() - d.getTime()) < 3 * 24 * 60 * 60 * 1000
+  return d.toLocaleDateString('en-GB', { hour: "2-digit", minute: "2-digit", day: 'numeric', month: 'short', year: 'numeric' })
 }
 
 export default function Page() {
@@ -118,7 +113,7 @@ export default function Page() {
 	                <div className="header">
 	                  <h2 className="title">{item.title}</h2>
 	                  {isRecent(item.updated_at) && (
-	                    <span className="recent">recently updated</span>
+	                    <span className="recent" title={fmtDate(item.updated_at)}>recently updated</span>
 	                  )}
 	                </div>
 									{item.summary && <p className={`summary ` + montserrat.className}>{item.summary}</p>}
@@ -127,7 +122,10 @@ export default function Page() {
 	                <div className="footer">
 	                  <p>Avr. rating: {(item.scores.map((val, _, __) => (val.value))
 	                    .reduce((partialSum, a) => partialSum + a, 0) / item.scores.length).toFixed(1)} </p>
-	                  <p>{fmtDate(item.created_at)}</p>
+										<div className='text-right'>
+											<p title='updated at'>{fmtDate(item.updated_at)}</p>
+											<p title='created at'>{fmtDate(item.created_at)}</p>
+										</div>
 	                </div>
 	              </div>
 	            </Link>
