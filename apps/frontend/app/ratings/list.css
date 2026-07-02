@@ -34,6 +34,10 @@
   padding-right: 1rem;
 }
 
+.tags {display: flex; gap: 5px; margin-bottom: 10px;}
+.tag {opacity: 0.5; cursor: pointer;}
+.tag.active {opacity: 1}
+
 .ratings-card {
   display: block;
   overflow: hidden;

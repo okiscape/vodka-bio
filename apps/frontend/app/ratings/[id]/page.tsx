@@ -24,7 +24,8 @@ interface RatingItem {
   summary: string | null
   description: string | null
   created_at: string
-  updated_at: string
+	updated_at: string
+  tags?: string[]
 }
 
 function fmtDate(iso: string) {
@@ -68,7 +69,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <div className="dates">
             <p>created {fmtDate(item.created_at)}</p>
             {item.created_at != item.updated_at && <p>updated {fmtDate(item.updated_at)}</p>}
-          </div>
+					</div>
+					{item.tags && <p className={`tags ` + montserrat.className}>[{item.tags?.join("] [")}]</p>}
 					{item.summary && <p className={`summary ` + montserrat.className}>{item.summary}</p>}
           {item.scores.length > 0 && (
             <div className="scores">

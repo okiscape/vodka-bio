@@ -68,11 +68,11 @@ async function routes(fastify: FastifyInstance) {
       const scores = JSON.stringify(body.scores ?? cur.scores)
       const banner = body.banner !== undefined ? body.banner : cur.banner
       const summary = body.summary !== undefined ? body.summary : cur.summary
-      const tags = JSON.stringify(body.tags ?? cur.tags)
+      const tags = JSON.stringify(body.tags ?? cur.tags).replace('\\', '').replace("[", "{").replace("]", "}")
       const description = body.description !== undefined ? body.description : cur.description
 
       const result = await query(
-        `UPDATE ratings SET title = $1, scores = $2, banner = $3, summary = $4, description = $5, tags = $6, updated_at = NOW()
+        `UPDATE ratings SET title = $1, scores = $2, banner = $3, summary = $4, description = $5, updated_at = NOW(), tags = $7
          WHERE id = $6
          RETURNING id, title, scores, banner, summary, description, created_at, updated_at, tags`,
         [title, scores, banner, summary, description, id, tags]

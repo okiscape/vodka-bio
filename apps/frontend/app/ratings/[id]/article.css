@@ -50,6 +50,7 @@
   color: #facc15;
 }
 
+.rating .tags,
 .rating .dates {
   display: flex;
   gap: 1rem;
