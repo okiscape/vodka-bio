@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import './article.css'
@@ -15,6 +16,40 @@ const montserrat = Montserrat({
 function fmtDate(iso: string) {
   const d = new Date(iso)
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+}
+
+function makeImgUrl(banner: string | null) {
+  if (!banner) return null
+  if (banner.startsWith('http')) return banner
+  return `${process.env.API_BASEURL}${banner}`
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const res = await fetch(`${process.env.API_BASEURL}/ratings/${id}`)
+  if (!res.ok) return {}
+  const data = await res.json() as { item: RatingItem }
+  const item = data.item
+
+  const title = item.title
+  const description = item.summary || `rating by okiscape`
+  const imgUrl = makeImgUrl(item.banner)
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: imgUrl ? [{ url: imgUrl }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: imgUrl ? [imgUrl] : [],
+    },
+  }
 }
 
 
