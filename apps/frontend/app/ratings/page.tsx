@@ -37,6 +37,13 @@ export default function Page() {
 		catch { }
   }
 
+	if (!process.env.API_BASEURL) return (
+		<div>
+			<p>theory of consentable internet, user: i consent! dev: i consent! envs: im not!!!</p>
+			<p>contact me on main page</p>
+		</div>
+  )
+
 	useEffect(() => {
 		fetchRatings()
   }, [])
@@ -50,8 +57,7 @@ export default function Page() {
   }
 
 	return (
-		process.env.API_BASEURL &&
-    <div className="ratings-page">
+		<div className="ratings-page">
       <p className="ratings-heading">ratings!</p>
       <p className="ratings-subtitle">things that.. i have opinion about</p>
 

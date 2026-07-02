@@ -1,6 +1,11 @@
 export const dynamic = 'force-dynamic'
 
 export default async function App() {
+ if (process.env.API_BASEURL) return (
+	 <div className="flex flex-col items-center">
+			<p>envs fucked up again</p>
+   </div>
+ )
  const _shitpostsFetch = await fetch(`${process.env.API_BASEURL}/gallery`)
  const galleryFetch = await _shitpostsFetch.json() as {items:{source: string, caption: string}[]}
  console.log(galleryFetch.items)
