@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { getRating } from '../funcs'
 
 export async function generateMetadata(
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<Metadata> {
-  const ratings = await getRating(process.env.API_BASEURL!, params.id)
+  const { id } = await params
+	const ratings = await getRating(process.env.API_BASEURL!, id)
 
   if (ratings.items.length <= 0) {
     return { title: 'Not found' }
