@@ -29,13 +29,6 @@ export default function Page() {
 	const [allTags, setAllTags] = useState<string[]>([])
 	const [fetchedRatings, setFetchedRatings] = useState<RatingItem[] | null>(null)
 
-	if (!process.env.API_BASEURL) return (
-		<div>
-			<p>theory of consentable internet, user: i consent! dev: i consent! envs: im not!!!</p>
-			<p>contact me on main page</p>
-		</div>
-  )
-
 	async function fetchRatings() {
 		try {
 			if (!process.env.API_BASEURL) throw new Error("process.env.API_BASEURL is undefined")
