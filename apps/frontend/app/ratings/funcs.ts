@@ -1,8 +1,8 @@
 import { cache } from 'react'
 import { RatingItem } from './types'
 
-export const getRating = cache(async (id?: string) => {
-  const res = await fetch(`${process.env.API_BASEURL}/ratings${id !== undefined ? "/" + id : ''}`, {
+export const getRating = cache(async (apiurl: string, id?: string) => {
+  const res = await fetch(`${apiurl}/ratings${id !== undefined ? "/" + id : ''}`, {
 		next: {
 			revalidate: 60
 		}

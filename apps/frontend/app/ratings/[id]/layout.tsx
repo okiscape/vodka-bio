@@ -1,11 +1,10 @@
-// app/ratings/[id]/layout.tsx
 import type { Metadata } from 'next'
 import { getRating } from '../funcs'
 
 export async function generateMetadata(
   { params }: { params: { id: string } }
 ): Promise<Metadata> {
-  const ratings = await getRating(params.id)
+  const ratings = await getRating(process.env.API_BASEURL!, params.id)
 
   if (ratings.items.length <= 0) {
     return { title: 'Not found' }

@@ -26,7 +26,7 @@ export default function Page() {
 
 	async function fetchRatings() {
 		try {
-			const res = await getRating()
+			const res = await getRating(process.env.API_BASEURL!)
 			setApiAlive(res != null)
 
 			const data = res.items
