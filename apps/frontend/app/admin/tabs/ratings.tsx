@@ -16,9 +16,10 @@ interface RatingItem {
   scores: Score[]
   banner: string | null
   summary: string | null
-  description: string | null
+  description?: string
   created_at: string
-  updated_at: string
+	updated_at: string
+  tags?: string[]
 }
 
 export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
@@ -100,7 +101,8 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
           title: editing.title!,
           scores: editing.scores,
           banner: editing.banner ?? null,
-          summary: editing.summary ?? '',
+					summary: editing.summary ?? '',
+					tags: editing.tags ?? [],
           description: editing.description ?? '',
         }}
         onSave={save}

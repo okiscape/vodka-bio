@@ -1,8 +1,8 @@
 
-interface Score {
+export interface Score {
   name: string
   value: number
-  max: number
+  max?: number
 }
 
 export interface RatingItem {
@@ -10,7 +10,8 @@ export interface RatingItem {
   title: string
   scores: Score[]
   banner: string | null
-  summary: string | null
+	summary: string | null
+  description?: string
   created_at: string
 	updated_at: string
   tags?: string[]

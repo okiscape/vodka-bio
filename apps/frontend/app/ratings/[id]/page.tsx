@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import './article.css'
 import { Montserrat } from 'next/font/google'
+import { isRecent } from '../funcs'
+import { RatingItem } from '../types'
 
 export const dynamic = 'force-dynamic'
 
@@ -10,34 +12,11 @@ const montserrat = Montserrat({
   subsets: ['latin'],
 })
 
-interface Score {
-  name: string
-  value: number
-  max: number
-}
-
-interface RatingItem {
-  id: number
-  title: string
-  scores: Score[]
-  banner: string | null
-  summary: string | null
-  description: string | null
-  created_at: string
-	updated_at: string
-  tags?: string[]
-}
-
 function fmtDate(iso: string) {
   const d = new Date(iso)
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 }
 
-function isRecent(iso: string) {
-  const d = new Date(iso)
-  const now = new Date()
-  return (now.getTime() - d.getTime()) < 3 * 24 * 60 * 60 * 1000
-}
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params

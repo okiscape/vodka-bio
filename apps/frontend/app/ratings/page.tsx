@@ -4,6 +4,7 @@ import { Montserrat } from 'next/font/google'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { RatingItem } from './types'
+import { getRating } from './funcs'
 
 
 const montserrat = Montserrat({

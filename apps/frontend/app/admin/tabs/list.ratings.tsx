@@ -1,21 +1,6 @@
 'use client'
 
-interface Score {
-  name: string
-  value: number
-  max?: number
-}
-
-interface RatingItem {
-  id: number
-  title: string
-  scores: Score[]
-  banner: string | null
-  summary: string | null
-  description: string | null
-  created_at: string
-  updated_at: string
-}
+import { RatingItem } from "@/app/ratings/types"
 
 export default function RatingsList({ items, onNew, onEdit, onRemove }: {
   items: RatingItem[]
