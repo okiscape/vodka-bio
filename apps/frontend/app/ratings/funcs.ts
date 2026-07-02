@@ -4,18 +4,21 @@ import { RatingItem } from './types'
 export const getRating = cache(async (apiurl: string, id?: string) => {
   if (!apiurl) {
     console.error('API_BASEURL is not defined')
-    return { ok: false, items: [] } as { ok: boolean; items: RatingItem[] }
+    return { ok: false }
   }
   try {
     const res = await fetch(`${apiurl}/ratings${id !== undefined ? "/" + id : ''}`, {
       next: { revalidate: 60 }
-    })
-    if (!res.ok) return { ok: false, items: [] }
-    return await res.json() as { ok: boolean; items: RatingItem[] }
+		})
+
+		if (!res.ok) return { ok: false }
+
+    return await res.json() as { ok: boolean; items?: RatingItem[], item?: RatingItem }
   } catch (err) {
     console.error('getRating failed:', err)
-    return { ok: false, items: [] } as { ok: boolean; items: RatingItem[] }
-  }})
+    return { ok: false }
+	}
+})
 
 export function isRecent(iso: string) {
   const d = new Date(iso)

@@ -1,24 +1,25 @@
+export const dynamic = 'force-dynamic'
+
 import type { Metadata } from 'next'
 import { getRating } from '../funcs'
 
-export const dynamic = 'force-dynamic'
 export async function generateMetadata(
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Metadata> {
-  const { id } = await params
+	const { id } = await params
 	const ratings = await getRating(process.env.API_BASEURL!, id)
 
-  if (ratings.items.length <= 0) {
+  if (!ratings.item) {
     return { title: 'Not found' }
 	}
-  const rating = ratings.items[0]
+  const rating = ratings.item
 
   const title = rating.title
   const description = rating.summary ?? 'rating'
   const images = rating.banner ? [rating.banner] : []
 
   return {
-    title,
+    title: "oki: " + rating.title,
     description,
     openGraph: {
       title,
