@@ -18,8 +18,7 @@ interface RatingItem {
   summary: string | null
   description: string | null
   created_at: string
-	updated_at: string
-  tags: string[]
+  updated_at: string
 }
 
 export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
@@ -48,10 +47,9 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
   function startEdit(item: RatingItem) {
     setEditing({
       title: item.title,
-      scores: item.scores.map(s => ({ name: s.name ?? '', value: s.value ?? 0, max: s.max })),
+      scores: item.scores.map(s => ({ name: s.name ?? '', value: s.value ?? 0, max: s.max ?? 10 })),
       banner: item.banner,
-			summary: item.summary || '',
-      tags: item.tags || [],
+      summary: item.summary || '',
       description: item.description || '',
     })
     setEditId(item.id)
@@ -62,7 +60,7 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
     setEditId(null)
   }
 
-	async function save(data: { title: string; scores: Score[]; banner: string | null; summary: string | null; description: string | null; tags: string[] }) {
+  async function save(data: { title: string; scores: Score[]; banner: string | null; summary: string | null; description: string | null }) {
     try {
       const method = editId ? 'PATCH' : 'POST'
       const url = editId ? `${apiBaseUrl}/ratings/${editId}` : `${apiBaseUrl}/ratings`
@@ -102,8 +100,7 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
           title: editing.title!,
           scores: editing.scores,
           banner: editing.banner ?? null,
-					summary: editing.summary ?? '',
-          tags: editing.tags ?? [],
+          summary: editing.summary ?? '',
           description: editing.description ?? '',
         }}
         onSave={save}

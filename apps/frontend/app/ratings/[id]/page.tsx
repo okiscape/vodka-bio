@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import './article.css'
 import { Montserrat } from 'next/font/google'
-import {isRecent} from "../funcs"
 
 export const dynamic = 'force-dynamic'
 
@@ -32,6 +31,12 @@ interface RatingItem {
 function fmtDate(iso: string) {
   const d = new Date(iso)
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+}
+
+function isRecent(iso: string) {
+  const d = new Date(iso)
+  const now = new Date()
+  return (now.getTime() - d.getTime()) < 3 * 24 * 60 * 60 * 1000
 }
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
@@ -65,11 +70,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <p>created {fmtDate(item.created_at)}</p>
             {item.created_at != item.updated_at && <p>updated {fmtDate(item.updated_at)}</p>}
 					</div>
-					{item.tags && <p
-							className={`tags ` + montserrat.className}
-					>
-						tags: [{item.tags?.join("] [")}]
-					</p>}
+					{item.tags && <p className={`tags ` + montserrat.className}>[{item.tags?.join("] [")}]</p>}
 					{item.summary && <p className={`summary ` + montserrat.className}>{item.summary}</p>}
           {item.scores.length > 0 && (
             <div className="scores">
