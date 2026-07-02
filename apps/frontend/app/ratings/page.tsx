@@ -3,7 +3,8 @@
 import { Montserrat } from 'next/font/google'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import {isRecent} from "./funcs"
+import {getRating, isRecent} from "./funcs"
+import { RatingItem } from './types'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,23 +12,6 @@ const montserrat = Montserrat({
   weight: '400',
   subsets: ['latin'],
 })
-
-interface Score {
-  name: string
-  value: number
-  max: number
-}
-
-interface RatingItem {
-  id: number
-  title: string
-  scores: Score[]
-  banner: string | null
-  summary: string | null
-  created_at: string
-	updated_at: string
-  tags?: string[]
-}
 
 function fmtDate(iso: string) {
   const d = new Date(iso)
@@ -42,10 +26,10 @@ export default function Page() {
 
 	async function fetchRatings() {
 		try {
-			const res = await fetch(`${process.env.API_BASEURL}/ratings`)
+			const res = await getRating()
 			setApiAlive(res != null)
 
-			const data = (await res.json()).items
+			const data = res.items
 			setFetchedRatings(data)
 			setAllTags(Array.from(new Set(data.flatMap((r: RatingItem) => r.tags || []))))		}
 		catch { }
