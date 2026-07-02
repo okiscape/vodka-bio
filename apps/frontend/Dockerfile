@@ -19,7 +19,6 @@ COPY --from=installer /app .
 COPY --from=pruner /app/out/full/ .
 COPY turbo.json turbo.json
 
-ENV API_BASEURL=${API_BASEURL}
 RUN pnpm turbo run build --filter=frontend
 
 FROM node:20-alpine AS runner

@@ -29,14 +29,14 @@ function sanitizeNumber(value: string) {
 
 export default function RatingsForm({ editId, initial, onSave, onCancel }: {
   editId: number | null
-	initial: { title: string; scores: Score[]; banner: string | null; summary: string; description: string; tags: string[] }
-	onSave: (data: { title: string; scores: Score[]; banner: string | null; summary: string | null; description: string | null; tags: string[]}) => Promise<void>
+	initial: { title: string; scores: Score[]; banner: string | null; summary: string; description: string; tags?: string[] }
+	onSave: (data: { title: string; scores: Score[]; banner: string | null; summary: string | null; description: string | null; tags?: string[]}) => Promise<void>
   onCancel: () => void
 }) {
   const [title, setTitle] = useState(initial.title)
   const [banner, setBanner] = useState(initial.banner ?? '')
   const [summary, setSummary] = useState(initial.summary)
-  const [tags, setTags] = useState<string>(initial.tags?.join(" "))
+  const [tags, setTags] = useState<string | undefined>(initial.tags?.join(" "))
   const [scores, setScores] = useState<FormScore[]>(
     initial.scores.map(s => ({ name: s.name, value: String(s.value ?? ''), max: String(s.max ?? '') }))
   )
@@ -72,7 +72,7 @@ export default function RatingsForm({ editId, initial, onSave, onCancel }: {
       })),
       banner: banner || null,
 			summary: summary || null,
-      tags: tags.split(" "),
+      tags: tags === undefined ? undefined : tags.split(" "),
       description: description || null,
     })
   }

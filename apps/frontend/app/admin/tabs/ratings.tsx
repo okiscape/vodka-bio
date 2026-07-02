@@ -50,7 +50,8 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
       title: item.title,
       scores: item.scores.map(s => ({ name: s.name ?? '', value: s.value ?? 0, max: s.max ?? 10 })),
       banner: item.banner,
-      summary: item.summary || '',
+			summary: item.summary || '',
+			tags: item.tags,
       description: item.description || '',
     })
     setEditId(item.id)
@@ -102,7 +103,7 @@ export default function RatingsTab({ apiBaseUrl, headers, showStatus }: {
           scores: editing.scores,
           banner: editing.banner ?? null,
 					summary: editing.summary ?? '',
-					tags: editing.tags ?? [],
+					tags: editing.tags,
           description: editing.description ?? '',
         }}
         onSave={save}
