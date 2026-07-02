@@ -18,12 +18,6 @@ function fmtDate(iso: string) {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 }
 
-function makeImgUrl(banner: string | null) {
-  if (!banner) return null
-  if (banner.startsWith('http')) return banner
-  return `${process.env.API_BASEURL}${banner}`
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const res = await fetch(`${process.env.API_BASEURL}/ratings/${id}`)
@@ -33,11 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   const title = item.title
   const description = item.summary || `rating by okiscape`
-  const imgUrl = makeImgUrl(item.banner)
+  const imgUrl = item.banner
 
   return {
     title,
-    description,
+		description,
     openGraph: {
       title,
       description,
@@ -46,7 +40,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     twitter: {
       card: 'summary_large_image',
       title,
-      description,
+			description,
+      creator: "okiscape",
       images: imgUrl ? [imgUrl] : [],
     },
   }

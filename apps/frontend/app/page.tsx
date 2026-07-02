@@ -9,14 +9,6 @@ const montserratUnderline = Montserrat_Underline({
 })
 
 async function App() {
-	if (!process.env.GITHUB_REPO_URL || !process.env.API_BASEURL || !process.env.SENKODIGITAL_REFERRAL || !process.env.OTORING_SLUG ) {
-		return (
-		 <body>
-				<p>something went wrong!!!</p>
-			</body>
-		)
- }
-
  const _otoringFetch = await fetch(`https://webring.otomir23.me/${process.env.OTORING_SLUG}/data`, {
   next: { revalidate: 3600*6 },
  })
@@ -43,13 +35,13 @@ async function App() {
    <div className="flex flex-wrap justify-center items-center gap-10">
     <video src="/videos/spinning.mp4" autoPlay loop className="spinningvideo" />
     <TabSelector lastUpdate={lastUpdateProps}
-     senkoReferral={process.env.SENKODIGITAL_REFERRAL}
-     githubRepoUrl={process.env.GITHUB_REPO_URL}
-     apiBaseUrl={process.env.API_BASEURL}
+     senkoReferral={process.env.SENKODIGITAL_REFERRAL ?? ""}
+     githubRepoUrl={process.env.GITHUB_REPO_URL ?? ""}
+     apiBaseUrl={process.env.API_BASEURL ?? ""}
     />
    </div>
 
-   <Banners apiBaseUrl={process.env.API_BASEURL} />
+   <Banners apiBaseUrl={process.env.API_BASEURL ?? ""} />
    <div className="gap-5 flex opacity-55">
     <a href={otoringFetch?.prev?.url}> {otoringFetch?.prev?.name || '[not found]'} </a>
     <a href="https://webring.otomir23.me/"> otoring </a>
