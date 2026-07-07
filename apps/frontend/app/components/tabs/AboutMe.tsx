@@ -1,4 +1,7 @@
+'use client'
+
 import { Montserrat } from 'next/font/google'
+import { useEffect, useState } from 'react'
 import ScrobbleLiveActivity from "../liveActivity"
 
 const montserrat = Montserrat({
@@ -6,38 +9,47 @@ const montserrat = Montserrat({
   subsets: ['latin'],
 })
 
-const myLinks = [
- { href: "https://github.com/okiscape", name: "github" },
- { href: "https://wakatime.com/@okiscape", name: "wakatime"},
- { href: "https://namemc.com/okiscape", name: "namemc"},
- { href: "https://last.fm/user/okiscape", name: "lastfm"},
- { href: "https://t.me/frtblessed", name: "telegramwork"},
-]
-
 type Props = {
- apiBaseUrl: string
+  apiBaseUrl: string
+}
+
+interface SiteInfo {
+    about: {
+        title: string
+        aka: string
+        description: string[]
+        links: { href: string; name: string }[]
+    }
 }
 
 export default function AboutMe({ apiBaseUrl }: Props) {
+  const [info, setInfo] = useState<SiteInfo | null>(null)
+
+  useEffect(() => {
+    fetch(`${apiBaseUrl}/info`)
+      .then(r => r.json())
+      .then(d => setInfo(d.item))
+      .catch(() => {})
+  }, [apiBaseUrl])
+
+  if (!info) return <div className="textcontainer"><p className="opacity-40">loading...</p></div>
 
   return (
     <div>
-      <h1>hello! im okiscape<span className="aka">(also neverett)</span></h1>
+      <h1>{info.about.title}<span className="aka">{info.about.aka}</span></h1>
       <div className={`description ${montserrat.className}`}>
-       <p>im self-taught fullstack developer from moscow</p>
-       <p>boobs</p>
-       <p>i oftenly feel like "main character" in "my" society, yk</p>
-       <p>i'd love to help anyone with tech, if i know something and can help with anything</p>
-       <p>i love oguricap and umamusume memes</p>
+        {info.about.description.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
       </div>
       <div className="mylinks">
-       {myLinks.map((link) => (
-        <a href={link.href} key={link.name} target='_blank'>
-         {link.name}
-        </a>
-       ))}
-    </div>
-    <ScrobbleLiveActivity apiBaseUrl={apiBaseUrl} />
+        {info.about.links.map((link) => (
+          <a href={link.href} key={link.name} target='_blank'>
+            {link.name}
+          </a>
+        ))}
+      </div>
+      <ScrobbleLiveActivity apiBaseUrl={apiBaseUrl} />
     </div>
   )
 }

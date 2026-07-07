@@ -14,6 +14,7 @@ import ratings from './routes/ratings.routes.js'
 import scrobbles from './routes/scrobbles.routes.js'
 import banners from './routes/banners.routes.js'
 import admin from './routes/admin.routes.js'
+import siteInfo from './routes/info.routes.js'
 
 import { initDb } from './db/index.js'
 
@@ -49,6 +50,7 @@ server.register(gallery)
 server.register(ratings)
 server.register(banners)
 server.register(admin)
+server.register(siteInfo)
 server.register(scrobbles)
 
 const start = async () => {

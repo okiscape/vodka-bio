@@ -38,6 +38,48 @@ export async function initDb() {
     await client.query(`
       ALTER TABLE ratings ADD COLUMN IF NOT EXISTS tags TEXT[];
     `)
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS site_info (
+        id INTEGER PRIMARY KEY DEFAULT 1,
+        about JSONB NOT NULL DEFAULT '{}'::jsonb,
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        CONSTRAINT single_row CHECK (id = 1)
+      );
+    `)
+
+    await client.query(`
+      ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about JSONB;
+    `)
+
+    await client.query(`
+      ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_title TEXT;
+      ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_aka TEXT;
+      ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_description JSONB;
+      ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_links JSONB;
+    `)
+
+    await client.query(`
+      UPDATE site_info SET about = jsonb_build_object(
+        'title', COALESCE(about_me_title, 'hello! im okiscape'),
+        'aka', COALESCE(about_me_aka, '(also neverett)'),
+        'description', COALESCE(about_me_description, '["im self-taught fullstack developer from moscow","boobs","i oftenly feel like \\"main character\\" in \\"my\\" society, yk","i''d love to help anyone with tech, if i know something and can help with anything","i love oguricap and umamusume memes"]'::jsonb),
+        'links', COALESCE(about_me_links, '[{"href":"https://github.com/okiscape","name":"github"},{"href":"https://wakatime.com/@okiscape","name":"wakatime"},{"href":"https://namemc.com/okiscape","name":"namemc"},{"href":"https://last.fm/user/okiscape","name":"lastfm"},{"href":"https://t.me/frtblessed","name":"telegramwork"}]'::jsonb)
+      )
+      WHERE id = 1 AND (about IS NULL OR about = '{}'::jsonb);
+    `)
+
+    await client.query(`
+      INSERT INTO site_info (id, about)
+      VALUES (1, jsonb_build_object(
+        'title', 'hello! im okiscape',
+        'aka', '(also neverett)',
+        'description', '["im self-taught fullstack developer from moscow","boobs","i oftenly feel like \\"main character\\" in \\"my\\" society, yk","i''d love to help anyone with tech, if i know something and can help with anything","i love oguricap and umamusume memes"]'::jsonb,
+        'links', '[{"href":"https://github.com/okiscape","name":"github"},{"href":"https://wakatime.com/@okiscape","name":"wakatime"},{"href":"https://namemc.com/okiscape","name":"namemc"},{"href":"https://last.fm/user/okiscape","name":"lastfm"},{"href":"https://t.me/frtblessed","name":"telegramwork"}]'::jsonb
+      ))
+      ON CONFLICT (id) DO NOTHING;
+    `)
+
     console.log('Database initialized')
   } finally {
     client.release()
