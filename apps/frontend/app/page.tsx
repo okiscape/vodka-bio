@@ -3,6 +3,7 @@ import { Montserrat_Underline } from 'next/font/google'
 import TabSelector from "./components/tabSelector"
 import Banners from "./components/banners"
 import Header from "./components/header";
+import ShoutBox from "./components/shoutBox";
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -42,6 +43,8 @@ async function App() {
      apiBaseUrl={process.env.API_BASEURL ?? ""}
     />
    </div>
+
+   <ShoutBox apiBaseUrl={process.env.API_BASEURL ?? ""} />
 
    <Banners apiBaseUrl={process.env.API_BASEURL ?? ""} />
    <div className="gap-5 flex opacity-55">

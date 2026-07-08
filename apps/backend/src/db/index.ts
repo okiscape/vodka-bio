@@ -61,10 +61,10 @@ export async function initDb() {
 
     await client.query(`
       UPDATE site_info SET about = jsonb_build_object(
-        'title', COALESCE(about_me_title, 'hello! im okiscape'),
-        'aka', COALESCE(about_me_aka, '(also neverett)'),
-        'description', COALESCE(about_me_description, '["im self-taught fullstack developer from moscow","boobs","i oftenly feel like \\"main character\\" in \\"my\\" society, yk","i''d love to help anyone with tech, if i know something and can help with anything","i love oguricap and umamusume memes"]'::jsonb),
-        'links', COALESCE(about_me_links, '[{"href":"https://github.com/okiscape","name":"github"},{"href":"https://wakatime.com/@okiscape","name":"wakatime"},{"href":"https://namemc.com/okiscape","name":"namemc"},{"href":"https://last.fm/user/okiscape","name":"lastfm"},{"href":"https://t.me/frtblessed","name":"telegramwork"}]'::jsonb)
+        'title', COALESCE(about_me_title, 'no-data'),
+        'aka', COALESCE(about_me_aka, 'no-data'),
+        'description', COALESCE(about_me_description, '["no-data"]'::jsonb),
+        'links', COALESCE(about_me_links, '[{"href":"https://google.com/","name":"no-links-yet"}]'::jsonb)
       )
       WHERE id = 1 AND (about IS NULL OR about = '{}'::jsonb);
     `)
@@ -72,12 +72,28 @@ export async function initDb() {
     await client.query(`
       INSERT INTO site_info (id, about)
       VALUES (1, jsonb_build_object(
-        'title', 'hello! im okiscape',
-        'aka', '(also neverett)',
-        'description', '["im self-taught fullstack developer from moscow","boobs","i oftenly feel like \\"main character\\" in \\"my\\" society, yk","i''d love to help anyone with tech, if i know something and can help with anything","i love oguricap and umamusume memes"]'::jsonb,
-        'links', '[{"href":"https://github.com/okiscape","name":"github"},{"href":"https://wakatime.com/@okiscape","name":"wakatime"},{"href":"https://namemc.com/okiscape","name":"namemc"},{"href":"https://last.fm/user/okiscape","name":"lastfm"},{"href":"https://t.me/frtblessed","name":"telegramwork"}]'::jsonb
+        'title', 'no-data',
+        'aka', 'no-data',
+        'description', '["no-data"]'::jsonb,
+        'links', '[{"href":"https://google.com/","name":"no-links-yet"}]'::jsonb
       ))
       ON CONFLICT (id) DO NOTHING;
+    `)
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS shouts (
+        id SERIAL PRIMARY KEY,
+        model_name TEXT NOT NULL DEFAULT '',
+        cosmetics TEXT NOT NULL DEFAULT '',
+        content TEXT NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `)
+    await client.query(`
+      ALTER TABLE shouts ADD COLUMN IF NOT EXISTS approved BOOLEAN NOT NULL DEFAULT false;
+    `)
+    await client.query(`
+      ALTER TABLE shouts ADD COLUMN IF NOT EXISTS ip_address TEXT NOT NULL DEFAULT '';
     `)
 
     console.log('Database initialized')

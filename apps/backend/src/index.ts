@@ -15,15 +15,26 @@ import scrobbles from './routes/scrobbles.routes.js'
 import banners from './routes/banners.routes.js'
 import admin from './routes/admin.routes.js'
 import siteInfo from './routes/info.routes.js'
+import shouts from './routes/shouts.routes.js'
 
 import { initDb } from './db/index.js'
 
-const server = fastify()
+const server = fastify({ trustProxy: true })
+
+server.setErrorHandler(async (error, request, reply) => {
+  if (reply.statusCode >= 500) {
+    console.error(error)
+    return reply.status(500).send({ ok: false, message: 'Internal server error' })
+  }
+  return reply.send(error)
+})
 
 server.addHook('preHandler', async (request, reply) => {
   const protected_routes = ['POST', 'DELETE', "PATCH"]
 
   if (!protected_routes.includes(request.method)) return
+
+  if (request.method === 'POST' && request.url.split('?')[0] === '/api/shouts') return
 
   const auth = request.headers['authorization']
 
@@ -52,6 +63,7 @@ server.register(banners)
 server.register(admin)
 server.register(siteInfo)
 server.register(scrobbles)
+server.register(shouts)
 
 const start = async () => {
   try {

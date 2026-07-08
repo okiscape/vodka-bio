@@ -1,0 +1,62 @@
+.shoutbox {
+    display: flex; gap: 20px;
+
+}
+.shoutbox .inputs {
+    display: flex; flex-direction: column;
+    width: 300px; gap: 10px;
+}
+.shoutbox .inputs input,
+.shoutbox .inputs textarea {
+    border-color: #fff1; border-width: 1px;
+}
+
+.shoutbox .inputs input:focus,
+.shoutbox .inputs textarea:focus {
+    border-color: #fff;
+}
+
+.shoutbox .inputs textarea {
+    min-height: 80px; resize: vertical;
+}
+
+.shoutbox .inputs button:disabled {
+    opacity: 0.3; cursor: not-allowed;
+}
+
+.shoutbox .list {
+    display: flex; flex-direction: column;
+    gap: 8px; min-width: 300px;
+    max-height: 400px; overflow-y: auto;
+}
+
+.shoutbox .list .item {
+    border: 1px solid #fff1; padding: 8px 12px;
+}
+
+.shoutbox .list .item .meta {
+    display: flex; justify-content: space-between;
+    font-size: 0.75rem; opacity: 0.5; margin-bottom: 4px;
+}
+
+.shoutbox .list .item .content {
+    word-break: break-word;
+    width: 600px;
+}
+
+.shoutbox .pagination {
+    display: flex; justify-content: center;
+    align-items: center; gap: 12px; margin-top: 8px;
+}
+
+.shoutbox .pagination button {
+    opacity: 0.5; font-size: 0.8rem;
+}
+
+.shoutbox .pagination button:disabled {
+    opacity: 0.2; cursor: not-allowed;
+}
+
+.shoutbox .pagination button:hover:not(:disabled) {
+    opacity: 1;
+}
