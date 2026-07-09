@@ -100,8 +100,8 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
                         <div key={s.id} className="item">
                           <div className="meta">
                             <span className="author">
-                              {s.model_name || 'anonymous'}
-                              {s.details ? ` (${s.details})` : ''}
+                              <span className="name">{s.model_name || 'anonymous'}</span>
+                              <span className="details">{s.details ? `${s.details}` : ''}</span>
                             </span>
                             <span className="date">
                               {new Date(s.created_at).toLocaleString()}

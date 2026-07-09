@@ -6,38 +6,38 @@
 }
 .shoutbox .inputs input,
 .shoutbox .inputs textarea {
-    border-color: #fff1; border-width: 1px;
+    border-color: #ffffff20; border-width: 1px;
+    padding: 5px;
 }
 
 .shoutbox .inputs input:focus,
 .shoutbox .inputs textarea:focus {
-    border-color: #fff;
+    border-color: none;
 }
 
 .shoutbox .inputs textarea {
     min-height: 80px; resize: vertical;
 }
 
-.shoutbox .inputs button:disabled {
-    opacity: 0.3; cursor: not-allowed;
-}
-
 .shoutbox .list {
     display: flex; flex-direction: column;
-    gap: 8px; flex: 1; min-width: 0;
+    gap: 8px; flex: 1; width: 500px;
     max-height: 400px; overflow-y: auto;
 }
 
 .shoutbox .list .item {
-    border: 1px solid #fff1; padding: 8px 12px;
+    border: 1px solid #ffffff20; padding: 8px 12px;
     min-width: 0;
 }
 
 .shoutbox .list .item .meta {
     display: flex; justify-content: space-between;
-    font-size: 0.75rem; opacity: 0.5; margin-bottom: 4px;
+    font-size: 0.75rem; margin-bottom: 4px;
     overflow-wrap: anywhere;
 }
+.shoutbox .list .item .meta .author .name {opacity: 1}
+.shoutbox .list .item .meta .author .details {margin-left: 10px; opacity: 0.5}
+.shoutbox .list .item .meta .date {opacity: 0.5}
 
 .shoutbox .list .item .content {
     overflow-wrap: break-word;

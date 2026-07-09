@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 interface ShoutItem {
   id: number
   model_name: string
-  cosmetics: string
+  details: string
   content: string
   created_at: string
   approved: boolean
@@ -78,7 +78,7 @@ export default function ShoutsTab({ apiBaseUrl, headers, showStatus }: {
                 {unapproved.map(s => (
                   <div key={s.id} className="border border-[#fff1] p-3 flex flex-col gap-2">
                     <div className="flex justify-between text-xs opacity-50">
-                      <span>{s.model_name || 'anonymous'}{s.cosmetics ? ` (${s.cosmetics})` : ''}</span>
+                      <span>{s.model_name || 'anonymous'}{s.details ? ` (${s.details})` : ''}</span>
                       <span>{new Date(s.created_at).toLocaleString()}</span>
                     </div>
                     <p className="text-sm">{s.content}</p>
@@ -101,7 +101,7 @@ export default function ShoutsTab({ apiBaseUrl, headers, showStatus }: {
                 {approved.map(s => (
                   <div key={s.id} className="border border-[#fff1] p-3 flex flex-col gap-2">
                     <div className="flex justify-between text-xs opacity-50">
-                      <span>{s.model_name || 'anonymous'}{s.cosmetics ? ` (${s.cosmetics})` : ''}</span>
+                      <span>{s.model_name || 'anonymous'}{s.details ? ` (${s.details})` : ''}</span>
                       <span>{new Date(s.created_at).toLocaleString()}</span>
                     </div>
                     <p className="text-sm">{s.content}</p>
