@@ -115,7 +115,8 @@ async function routes(fastify: FastifyInstance, options: any) {
     }
 
     const meta = await readMeta()
-    meta[filename] = { ...meta[filename], ...(caption !== undefined && { caption }), ...(display !== undefined && { display }) }
+    const existing = meta[filename] ?? { caption: '' }
+    meta[filename] = { ...existing, ...(caption !== undefined && { caption }), ...(display !== undefined && { display }) }
     await writeMeta(meta)
 
     return { ok: true, filename, caption: meta[filename].caption, display: meta[filename].display }
