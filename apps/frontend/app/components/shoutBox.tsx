@@ -5,7 +5,7 @@ import './shoutBox.css'
 type Shout = {
   id: number
   model_name: string
-  cosmetics: string
+  details: string
   content: string
   created_at: string
 }
@@ -16,7 +16,7 @@ type Props = {
 
 export default function ShoutBox({ apiBaseUrl }: Props) {
     const [modelname, setModelname] = useState('')
-    const [cosmetics, setCosmetics] = useState('')
+    const [details, setDetails] = useState('')
     const [shoutContent, setShoutContent] = useState('')
     const [shouts, setShouts] = useState<Shout[]>([])
     const [page, setPage] = useState(1)
@@ -26,7 +26,7 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
     async function fetchShouts() {
       try {
         setLoading(true)
-        const r = await fetch(`${apiBaseUrl}/shouts?page=${page}&limit=20`)
+        const r = await fetch(`${apiBaseUrl}/shouts?page=${page}&limit=10`)
         const json = await r.json()
         if (json.ok) {
           setShouts(json.items)
@@ -49,7 +49,7 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             model_name: modelname,
-            cosmetics,
+            details,
             content: shoutContent,
           }),
         })
@@ -57,7 +57,7 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
         if (json.ok) {
           setShoutContent('')
           setModelname('')
-          setCosmetics('')
+          setDetails('')
           setPage(1)
           await fetchShouts()
         } else {
@@ -79,9 +79,9 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
                     <input type="text" value={modelname}
                         placeholder="model-name-w-opts"
                         onChange={e => setModelname(e.target.value)} />
-                    <input type="text" value={cosmetics}
-                        placeholder="cosmetics (optional)"
-                        onChange={e => setCosmetics(e.target.value)} />
+                    <input type="text" value={details}
+                        placeholder="smol text aftr model-name"
+                        onChange={e => setDetails(e.target.value)} />
                     <textarea value={shoutContent}
                         placeholder="output (required)"
                         onChange={e => setShoutContent(e.target.value)} />
@@ -101,7 +101,7 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
                           <div className="meta">
                             <span className="author">
                               {s.model_name || 'anonymous'}
-                              {s.cosmetics ? ` (${s.cosmetics})` : ''}
+                              {s.details ? ` (${s.details})` : ''}
                             </span>
                             <span className="date">
                               {new Date(s.created_at).toLocaleString()}

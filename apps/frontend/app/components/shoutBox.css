@@ -1,10 +1,8 @@
-.shoutbox {
-    display: flex; gap: 20px;
+.shoutbox { display: flex; gap: 20px }
 
-}
 .shoutbox .inputs {
     display: flex; flex-direction: column;
-    width: 300px; gap: 10px;
+    flex: 0 0 35%; gap: 10px;
 }
 .shoutbox .inputs input,
 .shoutbox .inputs textarea {
@@ -26,22 +24,24 @@
 
 .shoutbox .list {
     display: flex; flex-direction: column;
-    gap: 8px; min-width: 300px;
+    gap: 8px; flex: 1; min-width: 0;
     max-height: 400px; overflow-y: auto;
 }
 
 .shoutbox .list .item {
     border: 1px solid #fff1; padding: 8px 12px;
+    min-width: 0;
 }
 
 .shoutbox .list .item .meta {
     display: flex; justify-content: space-between;
     font-size: 0.75rem; opacity: 0.5; margin-bottom: 4px;
+    overflow-wrap: anywhere;
 }
 
 .shoutbox .list .item .content {
+    overflow-wrap: break-word;
     word-break: break-word;
-    width: 600px;
 }
 
 .shoutbox .pagination {
@@ -59,4 +59,16 @@
 
 .shoutbox .pagination button:hover:not(:disabled) {
     opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .shoutbox {
+        flex-direction: column;
+    }
+    .shoutbox .inputs {
+        flex: none; width: 100%;
+    }
+    .shoutbox .list {
+        width: 100%;
+    }
 }

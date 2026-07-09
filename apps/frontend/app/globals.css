@@ -177,4 +177,9 @@ h1 .aka {
     column-count: 2;
   }
   .shitpostgallery.content img { max-width: 200px;}
+
+  .nowplaying-container {
+    justify-content: center;
+    text-align: center;
+  }
 }

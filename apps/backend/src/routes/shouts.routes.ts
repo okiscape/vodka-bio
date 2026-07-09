@@ -13,7 +13,7 @@ setInterval(() => {
 
 interface ShoutBody {
   model_name?: string
-  cosmetics?: string
+  details?: string
   content: string
 }
 
@@ -39,8 +39,8 @@ async function routes(fastify: FastifyInstance) {
 
     const result = await query(
       admin
-        ? 'SELECT id, model_name, cosmetics, content, created_at, approved FROM shouts ORDER BY created_at DESC LIMIT $1 OFFSET $2'
-        : 'SELECT id, model_name, cosmetics, content, created_at FROM shouts WHERE approved = true ORDER BY created_at DESC LIMIT $1 OFFSET $2',
+        ? 'SELECT id, model_name, details, content, created_at, approved FROM shouts ORDER BY created_at DESC LIMIT $1 OFFSET $2'
+        : 'SELECT id, model_name, details, content, created_at FROM shouts WHERE approved = true ORDER BY created_at DESC LIMIT $1 OFFSET $2',
       [limitNum, offset]
     )
 
@@ -66,9 +66,9 @@ async function routes(fastify: FastifyInstance) {
         ok: false,
         message: "model_name is too large"
     })
-    if ((body.cosmetics ?? '').length > 50) return reply.status(400).send({
+    if ((body.details ?? '').length > 50) return reply.status(400).send({
         ok: false,
-        message: "cosmetics is too large"
+        message: "details is too large"
     })
     if ((body.content ?? '').length > 250) return reply.status(400).send({
         ok: false,
@@ -84,10 +84,10 @@ async function routes(fastify: FastifyInstance) {
     ipCooldowns.set(ip, Date.now())
 
     const result = await query(
-      `INSERT INTO shouts (model_name, cosmetics, content, ip_address)
+      `INSERT INTO shouts (model_name, details, content, ip_address)
        VALUES ($1, $2, $3, $4)
-       RETURNING id, model_name, cosmetics, content, created_at`,
-      [body.model_name ?? '', body.cosmetics ?? '', body.content.trim(), ip]
+       RETURNING id, model_name, details, content, created_at`,
+      [body.model_name ?? '', body.details ?? '', body.content.trim(), ip]
     )
 
     return { ok: true, saved: result.rows[0] }

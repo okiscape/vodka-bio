@@ -84,7 +84,7 @@ export async function initDb() {
       CREATE TABLE IF NOT EXISTS shouts (
         id SERIAL PRIMARY KEY,
         model_name TEXT NOT NULL DEFAULT '',
-        cosmetics TEXT NOT NULL DEFAULT '',
+        details TEXT NOT NULL DEFAULT '',
         content TEXT NOT NULL,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
