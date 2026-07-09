@@ -6,6 +6,7 @@ interface GalleryItem {
   title: string
   source: string
   caption: string
+  display: boolean
   createdAt: string
 }
 
@@ -21,7 +22,7 @@ export default function GalleryTab({ apiBaseUrl, headers, showStatus }: {
   const [loading, setLoading] = useState(false)
 
   function load() {
-    fetch(`${apiBaseUrl}/gallery`)
+    fetch(`${apiBaseUrl}/gallery?showHidden=true`)
       .then(r => r.json())
       .then(d => setItems(d.items))
       .catch(() => showStatus(false, 'failed to load gallery'))
@@ -63,6 +64,20 @@ export default function GalleryTab({ apiBaseUrl, headers, showStatus }: {
       })
       if (!r.ok) throw new Error('update failed')
       setEditingCaption(prev => { const n = { ...prev }; delete n[filename]; return n })
+      load()
+    } catch (e: any) {
+      showStatus(false, e.message)
+    }
+  }
+
+  async function toggleDisplay(item: GalleryItem) {
+    try {
+      const r = await fetch(`${apiBaseUrl}/gallery/file/${encodeURIComponent(item.title)}`, {
+        method: 'PATCH',
+        headers: headers(),
+        body: JSON.stringify({ display: !item.display }),
+      })
+      if (!r.ok) throw new Error('toggle failed')
       load()
     } catch (e: any) {
       showStatus(false, e.message)
@@ -118,8 +133,14 @@ export default function GalleryTab({ apiBaseUrl, headers, showStatus }: {
                   {item.caption || <span className="opacity-30">no caption</span>}
                 </p>
               )}
-              <button onClick={() => remove(item.title)}
-                className="text-xs opacity-40 hover:opacity-100 button-delete self-end mt-1">delete</button>
+              <div className="flex gap-2 mt-1">
+                <button onClick={() => toggleDisplay(item)}
+                  className={`text-xs ${item.display ? 'opacity-60' : 'opacity-30 line-through'}`}>
+                  {item.display ? 'visible' : 'hidden'}
+                </button>
+                <button onClick={() => remove(item.title)}
+                  className="text-xs opacity-40 hover:opacity-100 button-delete">delete</button>
+              </div>
             </div>
           </div>
         ))}

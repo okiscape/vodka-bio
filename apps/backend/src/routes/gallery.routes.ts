@@ -12,7 +12,9 @@ if (!existsSync(GALLERY_DIR)) {
 
 const METADATA_FILE = join(GALLERY_DIR, 'metadata.json')
 
-async function readMeta(): Promise<Record<string, { caption: string }>> {
+type MetaEntry = { caption: string; display?: boolean }
+
+async function readMeta(): Promise<Record<string, MetaEntry>> {
   try {
     const raw = await readFile(METADATA_FILE, 'utf-8')
     return JSON.parse(raw)
@@ -21,28 +23,33 @@ async function readMeta(): Promise<Record<string, { caption: string }>> {
   }
 }
 
-async function writeMeta(meta: Record<string, { caption: string }>) {
+async function writeMeta(meta: Record<string, MetaEntry>) {
   await writeFile(METADATA_FILE, JSON.stringify(meta, null, 2))
 }
 
 async function routes(fastify: FastifyInstance, options: any) {
-  fastify.get('/api/gallery', async (request, reply) => {
+  fastify.get<{ Querystring: { showHidden?: string } }>('/api/gallery', async (request, reply) => {
+    const { showHidden } = request.query
     const files = (await readdir(GALLERY_DIR)).filter(f => f !== 'metadata.json')
     const meta = await readMeta()
 
     const items = await Promise.all(
       files.map(async (filename) => {
         const info = await stat(join(GALLERY_DIR, filename))
+        const entry = meta[filename] ?? { caption: '' }
         return {
           title: filename,
           source: `/gallery/file/${encodeURIComponent(filename)}`,
-          caption: meta[filename]?.caption ?? '',
+          caption: entry.caption,
+          display: entry.display ?? true,
           createdAt: info.birthtime,
         }
       })
     )
 
-    return { ok: true, items }
+    const filtered = showHidden === 'true' ? items : items.filter(i => i.display !== false)
+
+    return { ok: true, items: filtered }
   })
 
  fastify.get<{ Params: { filename: string } }>(
@@ -70,11 +77,9 @@ async function routes(fastify: FastifyInstance, options: any) {
    const caption = captionField && !Array.isArray(captionField) && captionField.type === 'field'
      ? captionField.value as string
      : ''
-   if (caption) {
-     const meta = await readMeta()
-     meta[safeName] = { caption: caption }
-     await writeMeta(meta)
-   }
+    const meta = await readMeta()
+    meta[safeName] = { caption: caption || '', display: true }
+    await writeMeta(meta)
 
    return { ok: true, saved: { title: safeName, source: `/gallery/file/${encodeURIComponent(safeName)}`, caption } }
   })
@@ -99,21 +104,21 @@ async function routes(fastify: FastifyInstance, options: any) {
     }
   )
 
- fastify.patch<{ Params: { filename: string }, Body: { caption: string } }>(
+ fastify.patch<{ Params: { filename: string }, Body: { caption?: string; display?: boolean } }>(
   '/api/gallery/file/:filename',
   async (request, reply) => {
     const { filename } = request.params
-    const { caption } = request.body
+    const { caption, display } = request.body
 
     if (!existsSync(join(GALLERY_DIR, filename))) {
       return reply.status(404).send({ ok: false, message: 'Not found' })
     }
 
     const meta = await readMeta()
-    meta[filename] = { ...meta[filename], caption }
+    meta[filename] = { ...meta[filename], ...(caption !== undefined && { caption }), ...(display !== undefined && { display }) }
     await writeMeta(meta)
 
-    return { ok: true, filename, caption }
+    return { ok: true, filename, caption: meta[filename].caption, display: meta[filename].display }
   }
 )
 }
