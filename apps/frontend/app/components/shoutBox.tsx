@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import './shoutBox.css'
+import { Montserrat } from "next/font/google"
 
 type Shout = {
   id: number
@@ -13,6 +14,11 @@ type Shout = {
 type Props = {
   apiBaseUrl: string
 }
+
+const montserrat = Montserrat({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function ShoutBox({ apiBaseUrl }: Props) {
     const [modelname, setModelname] = useState('')
@@ -75,7 +81,7 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
         <>
             <p>shoutbox!</p>
             <div className="shoutbox">
-                <div className="inputs">
+                <div className={`inputs`}>
                     <input type="text" value={modelname}
                         placeholder="model-name-w-opts"
                         onChange={e => setModelname(e.target.value)} />
