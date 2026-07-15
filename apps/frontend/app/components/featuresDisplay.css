@@ -1,0 +1,49 @@
+.featdisplay {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    align-items: center;
+    width: 1100px;
+}
+.featdisplay .item {
+    display: flex;
+    /*flex-direction: row-reverse;*/
+    align-items: center;
+    height: 490px;
+    overflow: hidden;
+}
+.featdisplay .item .preview {
+    height: 500px;
+    aspect-ratio: 1/1;
+}
+.featdisplay .item .content {
+    width: 600px;
+}
+.featdisplay .item .content p {
+    font-family: "Montserrat";
+}
+.featdisplay .item .content .buttons {
+    display: flex; flex-wrap: wrap;
+    gap: 10px; margin: 15px 0; column-count: 3; justify-content: left;
+}
+.featdisplay .item .content .buttons a {
+    border-style: solid;
+    border-color: #fff;
+    border-width: 1px;
+    height: 90px;
+    width: 250px;
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.featdisplay .item .content .buttons a:hover, .featdisplay .item .content .buttons a:focus{
+    background-color: #fff; color: #000;
+}
+.featdisplay .item .content .buttons a .meta {
+    display: flex; flex-direction: column;
+}
+.featdisplay .item .content .buttons a .meta .description {
+    font-size: 0.9rem; opacity: 0.5;
+}

@@ -4,6 +4,7 @@ import TabSelector from "./components/tabSelector"
 import Banners from "./components/banners"
 import Header from "./components/header";
 import ShoutBox from "./components/shoutBox";
+import Features from "./components/featuresDisplay"
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -43,6 +44,8 @@ async function App() {
      apiBaseUrl={process.env.API_BASEURL ?? ""}
     />
    </div>
+
+   <Features/>
 
    <ShoutBox apiBaseUrl={process.env.API_BASEURL ?? ""} />
 
