@@ -12,10 +12,10 @@ export function UmamiScript({domain, website_id}: Props) {
       document.body.appendChild(script)
 
     const scriptRecorder = document.createElement('script')
-    script.src = `https://umami.${domain}/recorder.js`
-    script.setAttribute('data-website-id', website_id)
-    script.defer = true
-    document.body.appendChild(script)
+    scriptRecorder.src = `https://umami.${domain}/recorder.js`
+    scriptRecorder.setAttribute('data-website-id', website_id)
+    scriptRecorder.defer = true
+    document.body.appendChild(scriptRecorder)
   }, [])
 
   return null
