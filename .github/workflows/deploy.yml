@@ -61,7 +61,8 @@ jobs:
         with:
             service_name: caddy
             filter_paths: |
-                - 'caddy/**'
+                src:
+                    - 'caddy/**'
             dockerfile: ./caddy/Dockerfile
             context: ./caddy
             image_tag: ghcr.io/okiscape/vodka-bio-caddy:latest

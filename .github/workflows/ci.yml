@@ -63,7 +63,7 @@ jobs:
             service_name: caddy
             filter_paths: |
                 src:
-                  - 'caddy/**'
+                    - 'caddy/**'
             dockerfile: ./caddy/Dockerfile
             context: ./caddy
             image_tag: vodka-bio-caddy:ci
