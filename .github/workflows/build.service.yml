@@ -35,9 +35,7 @@ jobs:
               id: filter
               uses: dorny/paths-filter@v3
               with:
-                  filters: |
-                      src:
-                        ${{ inputs.filter_paths }}
+                  filters: ${{ inputs.filter_paths }}
 
             - name: Set up Docker Buildx
               if: steps.filter.outputs.src == 'true'
