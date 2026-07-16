@@ -4,6 +4,7 @@ import TabSelector from "./components/tabSelector"
 import Banners from "./components/banners"
 import Header from "./components/header";
 import ShoutBox from "./components/shoutBox";
+import Features from "./components/featuresDisplay"
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ async function App() {
    backend: lastupdateJson.lastUpdates.backend,
  }
 
+ const apiBaseUrl = process.env.API_BASEURL ?? ""
 
  return (
   <body className={montserratUnderline.className}>
@@ -40,13 +42,15 @@ async function App() {
     <TabSelector lastUpdate={lastUpdateProps}
      senkoReferral={process.env.SENKODIGITAL_REFERRAL ?? ""}
      githubRepoUrl={process.env.GITHUB_REPO_URL ?? ""}
-     apiBaseUrl={process.env.API_BASEURL ?? ""}
+     apiBaseUrl={apiBaseUrl}
     />
    </div>
 
-   <ShoutBox apiBaseUrl={process.env.API_BASEURL ?? ""} />
+    <Features apiBaseUrl={apiBaseUrl} />
 
-   <Banners apiBaseUrl={process.env.API_BASEURL ?? ""} />
+   <ShoutBox apiBaseUrl={apiBaseUrl} />
+
+   <Banners apiBaseUrl={apiBaseUrl} />
    <div className="gap-5 flex opacity-55">
     <a href={otoringFetch?.prev?.url}> {otoringFetch?.prev?.name || '[not found]'} </a>
     <a href="https://webring.otomir23.me/"> otoring </a>

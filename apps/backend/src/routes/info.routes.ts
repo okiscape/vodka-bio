@@ -4,6 +4,7 @@ import { query } from '../db/index.js'
 interface AboutBody {
   title?: string
   aka?: string
+  contactUrl?: string,
   description?: string[]
   links?: { href: string; name: string }[]
 }
@@ -11,6 +12,7 @@ interface AboutBody {
 const defaults = {
   title: 'not set yet',
   aka: 'not set yet',
+  contactUrl: "https://google.com/",
   description: [
     'not set yet',
   ],

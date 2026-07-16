@@ -57,6 +57,7 @@ export async function initDb() {
       ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_aka TEXT;
       ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_description JSONB;
       ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_links JSONB;
+      ALTER TABLE site_info ADD COLUMN IF NOT EXISTS about_me_contact JSONB;
     `)
 
     await client.query(`
@@ -94,6 +95,17 @@ export async function initDb() {
     `)
     await client.query(`
       ALTER TABLE shouts ADD COLUMN IF NOT EXISTS ip_address TEXT NOT NULL DEFAULT '';
+    `)
+
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        description TEXT NOT NULL DEFAULT '',
+        url TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
     `)
 
     console.log('Database initialized')

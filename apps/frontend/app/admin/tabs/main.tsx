@@ -14,6 +14,7 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
 }) {
   const [title, setTitle] = useState('')
   const [aka, setAka] = useState('')
+  const [contactUrl, setContactUrl] = useState('')
   const [descriptionText, setDescriptionText] = useState('')
   const [links, setLinks] = useState<LinkItem[]>([])
   const [loaded, setLoaded] = useState(false)
@@ -25,6 +26,7 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
         const item = d.item
         setTitle(item.about.title)
         setAka(item.about.aka)
+        setContactUrl(item.about.contactUrl)
         setDescriptionText((item.about.description || []).join('\n'))
         setLinks(item.about.links || [])
         setLoaded(true)
@@ -55,6 +57,7 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
               about: {
                   title: title,
                   aka: aka,
+                  contactUrl: contactUrl || undefined,
                   description: descriptionText.split('\n').filter(p => p.trim()),
                   links: links.filter(l => l.name && l.href),
               }
@@ -75,14 +78,14 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
 
       <input
         placeholder="title"
-        value={title}
+        defaultValue={title}
         onChange={e => setTitle(e.target.value)}
         className="text-3xl font-bold px-0"
       />
 
       <input
         placeholder="aka (text in parentheses)"
-        value={aka}
+        defaultValue={aka}
         onChange={e => setAka(e.target.value)}
         className="text-sm px-0 opacity-60"
       />
@@ -90,7 +93,7 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
       <div className="flex flex-col gap-2">
         <span className="text-xs opacity-40">description (one paragraph per line)</span>
         <textarea
-          value={descriptionText}
+          defaultValue={descriptionText}
           onChange={e => setDescriptionText(e.target.value)}
           className="min-h-32 font-mono text-sm px-0"
           rows={8}
@@ -122,6 +125,13 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
           </div>
         ))}
       </div>
+
+      <input
+        placeholder="contact url"
+        defaultValue={contactUrl}
+        onChange={e => setContactUrl(e.target.value)}
+        className="text-sm px-0 opacity-60"
+      />
 
       <div className="flex gap-4 pt-2">
         <button onClick={handleSave}
