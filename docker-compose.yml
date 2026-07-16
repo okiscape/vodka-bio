@@ -3,6 +3,8 @@ services:
         image: ghcr.io/okiscape/vodka-bio-caddy:latest
         restart: unless-stopped
         container_name: vodka-caddy
+        environment:
+            DOMAIN: ${DOMAIN}
         ports:
             - "80:80"
             - "443:443"
@@ -20,6 +22,8 @@ services:
         restart: unless-stopped
         container_name: vodka-frontend
         environment:
+            DOMAIN: ${DOMAIN}
+            UMAMI_WEBSITE_ID: ${UMAMI_WEBSITE_ID}
             NODE_ENV: ${NODE_ENV}
             PORT: ${PORT_FRONTEND}
             OTORING_SLUG: ${OTORING_SLUG}
@@ -35,6 +39,7 @@ services:
         container_name: vodka-backend
         environment:
             NODE_ENV: ${NODE_ENV}
+            DOMAIN: ${DOMAIN}
             PORT: ${PORT_BACKEND}
             GITHUB_TOKEN: ${GITHUB_TOKEN}
             GITHUB_USERNAME: ${GITHUB_USERNAME}
@@ -78,7 +83,30 @@ services:
         environment:
             - DOCKER_API_VERSION=1.40
 
+    umami:
+        image: docker.umami.is/umami-software/umami:postgresql-latest
+        restart: unless-stopped
+        container_name: vodka-umami
+        environment:
+            DATABASE_URL: postgresql://umami:${UMAMI_DB_PASSWORD}@umami-db:5432/umami
+            DATABASE_TYPE: postgresql
+            APP_SECRET: ${UMAMI_APP_SECRET}
+        depends_on:
+            - umami-db
+
+    umami-db:
+        image: postgres:15-alpine
+        restart: unless-stopped
+        container_name: vodka-umami-db
+        environment:
+            POSTGRES_DB: umami
+            POSTGRES_USER: umami
+            POSTGRES_PASSWORD: ${UMAMI_DB_PASSWORD}
+        volumes:
+            - umami_db_data:/var/lib/postgresql/data
+
 volumes:
     caddy_data:
     caddy_config:
     pgdata:
+    umami_db_data:

@@ -45,7 +45,7 @@ server.addHook('preHandler', async (request, reply) => {
 })
 
 server.register(cors, {
-  origin: ['https://oki.vodka', 'http://localhost:3000'],
+  origin: [`https://${process.env.DOMAIN}`, 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Authorization', 'Content-Type'],
 })
