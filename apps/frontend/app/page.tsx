@@ -5,6 +5,7 @@ import Banners from "./components/banners"
 import Header from "./components/header";
 import ShoutBox from "./components/shoutBox";
 import Features from "./components/featuresDisplay"
+import { UmamiScript } from "./components/umamiScript";
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -56,6 +57,7 @@ async function App() {
     <a href="https://webring.otomir23.me/"> otoring </a>
     <a href={otoringFetch?.next?.url}> {otoringFetch?.next?.name || '[not found]'} </a>
    </div>
+   <UmamiScript domain={process.env.DOMAIN ?? ''} website_id={process.env.UMAMI_WEBSITE_ID ?? ''} />
   </body>
  );
 }
