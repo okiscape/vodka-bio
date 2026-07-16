@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect, useState } from "react"
 import './shoutBox.css'
 import { Montserrat } from "next/font/google"

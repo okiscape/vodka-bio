@@ -16,6 +16,7 @@ import banners from './routes/banners.routes.js'
 import admin from './routes/admin.routes.js'
 import siteInfo from './routes/info.routes.js'
 import shouts from './routes/shouts.routes.js'
+import projects from './routes/projects.routes.js'
 
 import { initDb } from './db/index.js'
 
@@ -64,6 +65,7 @@ server.register(admin)
 server.register(siteInfo)
 server.register(scrobbles)
 server.register(shouts)
+server.register(projects)
 
 const start = async () => {
   try {

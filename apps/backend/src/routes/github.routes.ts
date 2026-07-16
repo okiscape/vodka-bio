@@ -10,8 +10,8 @@ const lastUpdatePlugin: FastifyPluginAsync = async (fastify) => {
     }
 
     const [frontendRes, backendRes] = await Promise.all([
-      fetch('https://api.github.com/users/okiscape/packages/container/vodka-bio-frontend/versions?per_page=1', { headers }),
-      fetch('https://api.github.com/users/okiscape/packages/container/vodka-bio-backend/versions?per_page=1', { headers })
+      fetch(`https://api.github.com/users/${process.env.GITHUB_USERNAME}/packages/container/${process.env.GITHUB_FRONTEND_CONTAINER_NAME}/versions?per_page=1`, { headers }),
+      fetch(`https://api.github.com/users/${process.env.GITHUB_USERNAME}/packages/container/${process.env.GITHUB_BACKEND_CONTAINER_NAME}/versions?per_page=1`, { headers })
     ])
 
     if (!frontendRes.ok || !backendRes.ok) {

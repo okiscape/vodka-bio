@@ -6,6 +6,7 @@ import BannersTab from "./tabs/banners"
 import RatingsTab from "./tabs/ratings"
 import MainTab from "./tabs/main"
 import ShoutsTab from "./tabs/shouts"
+import ProjectsTab from "./tabs/projects"
 
 type Props = {
   apiBaseUrl: string
@@ -14,7 +15,7 @@ type Props = {
 const STORAGE_KEY = 'admin_token'
 
 export default function AdminPanel({ apiBaseUrl }: Props) {
-  const [tab, setTab] = useState<'main' | 'gallery' | 'banners' | 'ratings' | 'shouts'>('main')
+  const [tab, setTab] = useState<'main' | 'gallery' | 'banners' | 'ratings' | 'shouts' | 'projects'>('main')
   const [token, setToken] = useState('')
   const [tokenInput, setTokenInput] = useState('')
   const [statusMsg, setStatusMsg] = useState<{ ok: boolean, text: string } | null>(null)
@@ -86,7 +87,7 @@ export default function AdminPanel({ apiBaseUrl }: Props) {
       )}
 
       <div className="flex gap-4 mb-8">
-        {(['main', 'gallery', 'banners', 'ratings', 'shouts'] as const).map(t => (
+        {(['main', 'gallery', 'banners', 'ratings', 'shouts', 'projects'] as const).map(t => (
           <button
             key={t}
             className={`px-6 py-1 ${tab === t ? 'text-xl' : 'opacity-40 hover:opacity-100'}`}
@@ -102,6 +103,7 @@ export default function AdminPanel({ apiBaseUrl }: Props) {
       {tab === 'banners' && <BannersTab apiBaseUrl={apiBaseUrl} headers={headers} showStatus={showStatus} />}
       {tab === 'ratings' && <RatingsTab apiBaseUrl={apiBaseUrl} headers={headers} showStatus={showStatus} />}
       {tab === 'shouts' && <ShoutsTab apiBaseUrl={apiBaseUrl} headers={headers} showStatus={showStatus} />}
+      {tab === 'projects' && <ProjectsTab apiBaseUrl={apiBaseUrl} headers={headers} showStatus={showStatus} />}
     </div>
   )
 }
