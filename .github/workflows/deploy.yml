@@ -23,6 +23,7 @@ jobs:
         with:
             service_name: frontend
             filter_paths: |
+                src:
                 - 'apps/frontend/**'
                 - 'turbo.json'
                 - 'package.json'
@@ -40,8 +41,11 @@ jobs:
         with:
             service_name: backend
             filter_paths: |
+                src:
                 - 'apps/backend/**'
                 - 'turbo.json'
+                - 'package.json'
+                - 'pnpm-lock.yaml'
                 - 'package.json'
                 - 'pnpm-lock.yaml'
             dockerfile: apps/backend/Dockerfile
