@@ -12,7 +12,7 @@ on:
             - "package.json"
             - "pnpm-lock.yaml"
             - ".github/workflows/ci.yml"
-            - ".github/workflows/build-service.yml"
+            - ".github/workflows/build.service.yml"
     pull_request:
         paths:
             - "apps/frontend/**"
@@ -24,7 +24,7 @@ on:
 
 jobs:
     build-frontend:
-        uses: ./.github/workflows/build-service.yml
+        uses: ./.github/workflows/build.service.yml
         permissions:
             contents: read
         with:
@@ -40,7 +40,7 @@ jobs:
             push: false
 
     build-backend:
-        uses: ./.github/workflows/build-service.yml
+        uses: ./.github/workflows/build.service.yml
         permissions:
             contents: read
         with:
@@ -56,7 +56,7 @@ jobs:
             push: false
 
     build-caddy:
-        uses: ./.github/workflows/build-service.yml
+        uses: ./.github/workflows/build.service.yml
         permissions:
             contents: read
         with:
