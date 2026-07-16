@@ -16,7 +16,7 @@ env:
 
 jobs:
     build-frontend:
-        uses: ./.github/workflows/build-service.yml
+        uses: ./.github/workflows/build.service.yml
         permissions:
             contents: read
             packages: write
@@ -33,7 +33,7 @@ jobs:
             push: true
 
     build-backend:
-        uses: ./.github/workflows/build-service.yml
+        uses: ./.github/workflows/build.service.yml
         permissions:
             contents: read
             packages: write
@@ -50,7 +50,7 @@ jobs:
             push: true
 
     build-caddy:
-        uses: ./.github/workflows/build-service.yml
+        uses: ./.github/workflows/build.service.yml
         permissions:
             contents: read
             packages: write
