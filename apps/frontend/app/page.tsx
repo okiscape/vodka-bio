@@ -47,7 +47,7 @@ async function App() {
     />
    </div>
 
-    <Features apiBaseUrl={apiBaseUrl} />
+   <Features apiBaseUrl={apiBaseUrl} />
 
    <ShoutBox apiBaseUrl={apiBaseUrl} />
 

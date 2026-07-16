@@ -12,5 +12,6 @@
 
 umami.{$DOMAIN} {
  tls /etc/caddy/certs/org.pem /etc/caddy/certs/org.key
+
  reverse_proxy vodka-umami:3000
 }

@@ -31,7 +31,7 @@ async function scrobblesRoutes(fastify: FastifyInstance, options: any) {
           image: [{ size: 'large', '#text': '' }],
         }
 
-   const largeImage = nowPlaying.image.find((img) => img.size === 'large')!
+    const largeImage = nowPlaying.image.find((img) => img.size === 'large')!
     const artistImage = artist.image.find((img) => img.size === 'large')!
 
     const track: LastFMTrackReturnObject = {
