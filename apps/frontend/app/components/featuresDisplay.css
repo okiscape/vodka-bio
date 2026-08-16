@@ -75,9 +75,10 @@
     }
     .featdisplay .item .content .buttons {
         column-count: 2;
+        justify-content: center;
     }
     .featdisplay .item .content .buttons a {
-        width: 50%;
+        width: 48%;
         height: auto;
         padding: 10px;
     }
