@@ -1,0 +1,46 @@
+.yabloko {
+    width: 60%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    align-items: center;
+    overflow: hidden;
+}
+.yabloko .disclaimer {
+    text-align: center;
+    opacity: 0.5;
+    font-family: "Montserrat";
+    font-size: 1rem;
+}
+
+.yabloko .content {
+    display: flex;
+    background-color: #00A23D50;
+    width: max-content;
+    animation: right-scroll 20s infinite linear;
+}
+
+.yabloko .track {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px 10px;
+    flex-shrink: 0;
+}
+
+.yabloko .content .logo {
+    height: 25px;
+}
+
+.yabloko .content p {
+    text-align: center;
+    width: 270px;
+}
+
+@keyframes right-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}

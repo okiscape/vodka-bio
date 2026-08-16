@@ -6,6 +6,7 @@ import Header from "./components/header";
 import ShoutBox from "./components/shoutBox";
 import Features from "./components/featuresDisplay"
 import { UmamiScript } from "./components/umamiScript";
+import Yabloko from "./components/yabloko";
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -46,6 +47,8 @@ async function App() {
      apiBaseUrl={apiBaseUrl}
     />
    </div>
+
+   <Yabloko/>
 
    <Features apiBaseUrl={apiBaseUrl} />
 
