@@ -1,16 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { Montserrat } from 'next/font/google'
 
 type Props = {
  apiBaseUrl: string
 }
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 export default function App({ apiBaseUrl }: Props) {
  const [nowPlaying, setNowPlaying] = useState<{title: string, artist: string, cover: string, url: string} | null>(null)
@@ -40,9 +34,9 @@ export default function App({ apiBaseUrl }: Props) {
     <a className="nowplaying-container" href={nowPlaying.url} target="_blank">
      {nowPlaying.cover && <img src={nowPlaying.cover} className="cover" />}
      <div className="meta">
-      <p className={`artist ${montserrat.className} mb-2`}>now playing</p>
+      <p className="artist mb-2 font-montserrat">now playing</p>
       <p className="title">{nowPlaying.title}</p>
-      <p className={`artist ${montserrat.className}`}>{nowPlaying.artist}</p>
+      <p className="artist font-montserrat">{nowPlaying.artist}</p>
      </div>
     </a>}
    </div>

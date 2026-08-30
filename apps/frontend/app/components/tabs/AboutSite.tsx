@@ -1,10 +1,3 @@
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
-
 type Props = {
  lastUpdate: { backend: number, frontend: number },
  senkoReferral: string,
@@ -21,7 +14,7 @@ export default function AboutSite({ lastUpdate, senkoReferral, githubRepoUrl }: 
   return (
     <div>
       <h1>about this site</h1>
-      <div className={`description ${montserrat.className}`}>
+      <div className="description font-montserrat">
         <p>this website written using next.js and react</p>
         <p>i have a LOT of ideas for this website, but i have a paws yk(itll be veryverysoon!)</p>
         <p>and holy god, its fully automatized with github actions, watchtower and docker with custom packages</p>

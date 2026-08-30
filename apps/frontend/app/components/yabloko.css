@@ -1,5 +1,5 @@
 .yabloko {
-    width: 60%;
+    width: 800px;
     font-size: 1.3rem;
     font-weight: 600;
     align-items: center;
@@ -42,5 +42,37 @@
     }
     100% {
         transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 900px) {
+    .yabloko {
+        width: 640px;
+        font-size: 1.1rem;
+    }
+    .yabloko .content p {
+        width: 200px;
+    }
+    .yabloko .content .logo {
+        height: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .yabloko {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+    .yabloko .track {
+        gap: 10px;
+    }
+    .yabloko .content p {
+        width: 130px;
+    }
+    .yabloko .content .logo {
+        height: 16px;
+    }
+    .yabloko .disclaimer {
+        font-size: 0.85rem;
     }
 }

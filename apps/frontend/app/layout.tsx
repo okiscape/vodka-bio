@@ -1,4 +1,29 @@
+import type { Metadata, Viewport } from 'next'
+import Header from "./components/header";
+import { UmamiScript } from "./components/umamiScript";
 import "./globals.css";
+
+const siteUrl = process.env.DOMAIN ? `https://${process.env.DOMAIN}` : undefined
+
+export const metadata: Metadata = {
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  title: 'okiscape',
+  description: 'hello! this is my personal website. i use arch btw',
+  icons: { icon: '/face.png' },
+  openGraph: {
+    title: 'okiscape',
+    description: 'hello! this is my personal website. i use arch btw',
+    images: [{ url: '/face.png' }],
+  },
+  twitter: {
+    title: 'okiscape',
+    description: 'i use arch btw',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#2d46b1',
+}
 
 export default function RootLayout({
   children,
@@ -10,19 +35,11 @@ export default function RootLayout({
       lang="en"
       className="h-full antialiased"
     >
-    <head>
-     <title>okiscape</title>
-     <link rel="icon" href="/face.png" />
-     {/*<meta name="og:image" content="/face.png" />*/}
-     <meta name="og:title" content="okiscape" />
-     <meta name="og:description" content="hello! this is my personal website. i use arch btw" />
-     {/*<meta name="og:site_name" content="FUCK YOU!!! sorry" />*/}
-     <meta name="theme-color" content="#2d46b1" />
-
-     <meta name="twitter:title" content="okiscape" />
-     <meta name="twitter:description" content="i use arch btw" />
-    </head>
-    {children}
+    <body>
+      <Header/>
+      {children}
+      <UmamiScript domain={process.env.DOMAIN ?? ''} website_id={process.env.UMAMI_WEBSITE_ID ?? ''} />
+    </body>
    </html>
   );
 }

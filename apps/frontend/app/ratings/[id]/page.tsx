@@ -2,16 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import './article.css'
-import { Montserrat } from 'next/font/google'
 import { isRecent } from '../funcs'
 import { RatingItem } from '../types'
 
 export const dynamic = 'force-dynamic'
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 function fmtDate(iso: string) {
   const d = new Date(iso)
@@ -79,8 +73,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <p>created {fmtDate(item.created_at)}</p>
             {item.created_at != item.updated_at && <p>updated {fmtDate(item.updated_at)}</p>}
 					</div>
-					{item.tags && <p className={`tags ` + montserrat.className}>[{item.tags?.join("] [")}]</p>}
-					{item.summary && <p className={`summary ` + montserrat.className}>{item.summary}</p>}
+					{item.tags && <p className="tags font-montserrat">[{item.tags?.join("] [")}]</p>}
+					{item.summary && <p className="summary font-montserrat">{item.summary}</p>}
           {item.scores.length > 0 && (
             <div className="scores">
               {item.scores.map((s, i) => (
@@ -100,7 +94,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         </div>
         {item.description && (
           <div
-						className={`description ` + montserrat.className}
+						className={`description font-montserrat`}
             dangerouslySetInnerHTML={{ __html: item.description }}
           />
         )}

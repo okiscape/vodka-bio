@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
+
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: 'okiscape: gallery',
+}
 
 export default async function App(props: { searchParams: Promise<{ showHidden?: string }> }) {
  const searchParams = await props.searchParams

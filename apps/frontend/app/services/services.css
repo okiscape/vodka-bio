@@ -1,0 +1,25 @@
+@import "../globals.css";
+
+body {
+  font-family: "Montserrat";
+}
+
+.services .description {
+  display: flex;
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.services .description .text h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.services .description .text p {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.services .description .laptopvideo {
+  width: 400px;
+}

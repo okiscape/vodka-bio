@@ -1,0 +1,88 @@
+.mylinks {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.textcontainer {
+  width: 550px;
+  max-width: 100%;
+}
+
+.textcontainer .description {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.lmaowhat {
+  background: linear-gradient(to right, #7825dd, #feb454);
+  -webkit-background-clip: text;
+  color: #ffffff00;
+}
+
+.userbanner-space {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 900px;
+  column-gap: 10px;
+  row-gap: 5px;
+  min-height: 150px;
+  align-items: center;
+}
+.userbanner {transition: all 0.4s; max-width: 500px;}
+
+.userbanner:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #000;
+}
+
+.userbanner.oguribanner:hover {
+  transition: all 0.5s;
+}
+
+.nowplaying-container {
+ display: flex; align-items: center; gap: 25px; margin-top: 20px; width: 100%;
+}
+.nowplaying-container .cover {max-width: 80px;}
+.nowplaying-container .title {font-size: 1.1rem;}
+.nowplaying-container .artist {opacity: 0.7; font-family: "Montserrat";}
+
+.spinningvideo {
+  width: 500px;
+  max-width: 100%;
+}
+
+.contentselector {display: flex; gap: 10px; color: rgba(255, 255, 255, 0.6)}
+.contentselector .active {color: #fff}
+
+@media (max-width: 900px) {
+  .spinningvideo {
+    width: 340px;
+  }
+
+  .textcontainer {
+    width: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .spinningvideo {
+    width: 220px;
+  }
+
+  .textcontainer {
+    width: 100%;
+    text-align: center;
+  }
+  .contentselector {justify-content: center;}
+
+  .mylinks {
+    justify-content: center;
+  }
+
+  .nowplaying-container {
+    justify-content: center;
+    text-align: center;
+  }
+}

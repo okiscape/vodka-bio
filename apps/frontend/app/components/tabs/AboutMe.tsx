@@ -1,13 +1,7 @@
 'use client'
 
-import { Montserrat } from 'next/font/google'
 import { useEffect, useState } from 'react'
 import ScrobbleLiveActivity from "../liveActivity"
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 type Props = {
   apiBaseUrl: string
@@ -37,7 +31,7 @@ export default function AboutMe({ apiBaseUrl }: Props) {
   return (
     <div>
       <h1>{info.about.title}<span className="aka">{info.about.aka}</span></h1>
-      <div className={`description ${montserrat.className}`}>
+      <div className="description font-montserrat">
         {info.about.description.map((p, i) => (
           <p key={i}>{p}</p>
         ))}

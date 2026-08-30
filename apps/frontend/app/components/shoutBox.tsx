@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import './shoutBox.css'
-import { Montserrat } from "next/font/google"
 
 type Shout = {
   id: number
@@ -15,11 +14,6 @@ type Shout = {
 type Props = {
   apiBaseUrl: string
 }
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 export default function ShoutBox({ apiBaseUrl }: Props) {
     const [modelname, setModelname] = useState('')

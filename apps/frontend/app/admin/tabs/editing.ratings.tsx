@@ -1,12 +1,6 @@
 'use client'
 
-import { Montserrat } from "next/font/google"
 import { useState } from "react"
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 interface Score {
   name: string
@@ -142,7 +136,7 @@ export default function RatingsForm({ editId, initial, onSave, onCancel }: {
             </button>
           </div>
           {descPreview ? (
-            <div className={`min-h-32 w-170 ` + montserrat.className}
+            <div className="min-h-32 w-170 font-montserrat"
               dangerouslySetInnerHTML={{ __html: description }} />
           ) : (
             <textarea value={description} onChange={e => setDescription(e.target.value)}

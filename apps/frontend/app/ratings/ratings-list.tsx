@@ -1,16 +1,9 @@
 'use client'
 
-import { Montserrat } from 'next/font/google'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { RatingItem } from './types'
 import { getRating } from './funcs'
-
-
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 function fmtDate(iso: string) {
   const d = new Date(iso)
@@ -125,7 +118,7 @@ export default function RatingsList({ apiBaseUrl }: { apiBaseUrl: string }) {
 	                    <span className="recent">recently updated</span>
 	                  )}
 	                </div>
-									{item.summary && <p className={`summary ` + montserrat.className}>{item.summary}</p>}
+									{item.summary && <p className="summary font-montserrat">{item.summary}</p>}
 									{item.tags && <p className="summary">[{item.tags?.join("] [")}]</p>}
 
 	                <div className="footer">
