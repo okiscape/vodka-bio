@@ -18,6 +18,7 @@ out
 build
 .turbo
 *.lock
+.zed
 
 .turbo/
 .eslintcache
