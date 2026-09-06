@@ -4,6 +4,12 @@ body {
   font-family: "Montserrat";
 }
 
+.services {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+}
+
 .services .description {
   display: flex;
   gap: 20px;
@@ -11,15 +17,86 @@ body {
   align-items: center;
 }
 
-.services .description .text h1 {
+.services .description .content {
+  display: flex; flex-direction: column;
+  width: 650px; gap: 15px
+}
+
+.services .description .content h1 {
   font-size: 2rem;
   font-weight: 500;
 }
-.services .description .text p {
+
+.services .description .content p {
   font-size: 1.2rem;
   font-weight: 400;
 }
 
+.services .description .contact {
+  width: 250px;
+  text-align: center;
+  border-color: #fff;
+  border-width: 1px;
+  padding: 10px 20px;
+  transition: all 0.25s;
+}
+.services .description .content .contact:hover {
+  color: #000;
+  font-weight: 600;
+  color: #62A0EA;
+  border-color: #62A0EA;
+}
+
 .services .description .laptopvideo {
   width: 400px;
+}
+
+.services .quickdate h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.services .quickdate {
+  align-items: center;
+  justify-content: center;
+}
+
+.skilldisplay {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  gap: 20px;
+}
+
+.skilldisplay .text {
+  width: 650px;
+}
+
+.skillcard {
+  max-width: 400px;
+}
+
+.skillcard .name {
+  color: var(--skill-color);
+  margin-left: -5px;
+}
+
+.skillcard .description {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.skillcard {
+  width: 300px
+}
+
+@media (max-width: 700px) {
+  .services .description {
+    flex-direction: column;
+  }
+
+  .services .description .text {
+    width: 100%;
+  }
 }
