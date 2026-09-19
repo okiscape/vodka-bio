@@ -68,7 +68,7 @@ async function routes(fastify: FastifyInstance) {
       const scores = JSON.stringify(body.scores ?? cur.scores)
       const banner = body.banner !== undefined ? body.banner : cur.banner
       const summary = body.summary !== undefined ? body.summary : cur.summary
-      const tags = JSON.stringify(body.tags ?? cur.tags).replace('\\', '').replace("[", "{").replace("]", "}")
+      const tags = body.tags !== undefined ? body.tags : cur.tags
       const description = body.description !== undefined ? body.description : cur.description
 
       const result = await query(
