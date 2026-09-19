@@ -39,5 +39,4 @@ USER nextjs
 
 EXPOSE 80
 
-# Запускаем автономный сервер Next.js
 CMD ["node", "apps/frontend/server.js"]

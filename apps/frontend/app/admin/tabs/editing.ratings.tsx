@@ -66,7 +66,7 @@ export default function RatingsForm({ editId, initial, onSave, onCancel }: {
       })),
       banner: banner || null,
 			summary: summary || null,
-      tags: tags === undefined ? undefined : tags.split(" "),
+      tags: tags === undefined ? undefined : tags.split(" ").map(t => t.trim()).filter(Boolean),
       description: description || null,
     })
   }
