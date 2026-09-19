@@ -5,15 +5,21 @@ COPY . .
 RUN turbo prune frontend --docker
 
 FROM node:20-alpine AS installer
-RUN npm install -g pnpm
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV COREPACK_ENABLE_STRICT=0
+
 WORKDIR /app
 
 COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+
+RUN pnpm config set pmOnFail ignore
 RUN pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
-RUN npm install -g pnpm
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 COPY --from=installer /app .
 COPY --from=pruner /app/out/full/ .
