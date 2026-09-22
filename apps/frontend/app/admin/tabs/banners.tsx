@@ -78,7 +78,7 @@ export default function BannersTab({ apiBaseUrl, headers, showStatus }: {
     try {
       const r = await fetch(`${apiBaseUrl}/banners/${encodeURIComponent(filename)}`, {
         method: 'DELETE',
-        headers: headers(),
+        headers: { 'Authorization': headers()['Authorization'] },
       })
       if (!r.ok) throw new Error('delete failed')
       load()
