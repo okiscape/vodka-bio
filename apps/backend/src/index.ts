@@ -23,11 +23,22 @@ import { initDb } from './db/index.js'
 const server = fastify({ trustProxy: true })
 
 server.setErrorHandler(async (error, request, reply) => {
-  if (reply.statusCode >= 500) {
-    console.error(error)
-    return reply.status(500).send({ ok: false, message: 'Internal server error' })
+  const rawStatus = (error as { statusCode?: unknown })?.statusCode
+  const status = typeof rawStatus === 'number' && rawStatus >= 400
+    ? rawStatus
+    : reply.statusCode >= 400
+      ? reply.statusCode
+      : 500
+
+  if (status >= 500) {
+    request.log.error(error)
+    return reply.status(status).send({ ok: false, message: 'Internal server error' })
   }
-  return reply.send(error)
+
+  return reply.status(status).send({
+    ok: false,
+    message: error instanceof Error && error.message ? error.message : 'Bad request',
+  })
 })
 
 server.addHook('preHandler', async (request, reply) => {
