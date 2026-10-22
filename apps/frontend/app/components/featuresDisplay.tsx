@@ -44,7 +44,7 @@ export default function FeaturesDisplay({apiBaseUrl}: Props) {
     return (
         <div className="featdisplay">
             <div className="item">
-                <video src="/videos/anvil.mp4" autoPlay loop
+                <video src="/videos/anvil.mkv" autoPlay loop
                     className="preview" />
                 <div className="content">
                     <h1>My projects</h1>
