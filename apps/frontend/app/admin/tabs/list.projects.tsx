@@ -21,7 +21,7 @@ export default function ProjectsList({ items, onNew, onEdit, onRemove }: {
         className="text-sm self-start opacity-60 hover:opacity-100">
         + new project
       </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="admin-grid-list">
         {items.map(item => (
           <div key={item.id} className="flex flex-col gap-2">
             <p className="font-bold">{item.title}</p>

@@ -81,14 +81,14 @@ export default function RatingsForm({ editId, initial, onSave, onCancel }: {
     <div className="w-full max-w-3xl flex flex-col gap-6">
       <p className="text-xl">{editId ? 'edit rating' : 'new rating'}</p>
 
-      <div className="flex gap-16 min-h-96 justify-center">
-        <div className="flex flex-col">
+      <div className="rating-editor">
+        <div className="flex flex-col min-w-0">
           {banner && (
             <img src={banner} className="w-full h-48 object-cover" />
           )}
 
           <input value={title} onChange={e => setTitle(e.target.value)}
-            className="text-3xl font-bold px-0"
+            className="admin-h1 font-bold px-0"
             placeholder="title" />
 
           <input placeholder="banner image URL" value={banner} title="banner image URL" onChange={e => setBanner(e.target.value)}
@@ -107,9 +107,9 @@ export default function RatingsForm({ editId, initial, onSave, onCancel }: {
                 className="text-xs opacity-40 hover:opacity-100">+ add score</button>
             </div>
             {scores.map((s, i) => (
-              <div key={i} className="flex gap-3 items-center">
+              <div key={i} className="score-row">
                 <input placeholder="name" value={s.name} onChange={e => updateScore(i, 'name', e.target.value)}
-                  className="px-0 py-1 text-sm flex-1" />
+                  className="px-0 py-1 text-sm flex-1 min-w-24" />
                 <input
                   type="text"
                   inputMode="decimal"
@@ -142,11 +142,11 @@ export default function RatingsForm({ editId, initial, onSave, onCancel }: {
             </button>
           </div>
           {descPreview ? (
-            <div className={`min-h-32 w-170 ` + montserrat.className}
+            <div className={`rating-description-preview ${montserrat.className}`}
               dangerouslySetInnerHTML={{ __html: description }} />
           ) : (
             <textarea value={description} onChange={e => setDescription(e.target.value)}
-              className="min-h-64 w-170 font-mono overflow-visible resize-y text-sm px-0"
+              className="rating-description-editor font-mono overflow-visible resize-y text-sm px-0"
               placeholder="<p>html here...</p>" />
           )}
         </div>

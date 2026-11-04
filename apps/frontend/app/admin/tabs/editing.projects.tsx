@@ -27,7 +27,7 @@ export default function ProjectsForm({ editId, initial, onSave, onCancel }: {
 
       <div className="flex flex-col gap-4">
         <input value={title} onChange={e => setTitle(e.target.value)}
-          className="text-3xl font-bold px-0"
+          className="admin-h1 font-bold px-0"
           placeholder="title" />
 
         <input placeholder="url" value={url} onChange={e => setUrl(e.target.value)}
@@ -36,7 +36,7 @@ export default function ProjectsForm({ editId, initial, onSave, onCancel }: {
         <div className="flex flex-col gap-2">
           <span className="text-xs opacity-40">description (plain text)</span>
           <textarea value={description} onChange={e => setDescription(e.target.value)}
-            className="min-h-32 font-mono overflow-visible resize-y text-sm px-0"
+            className="admin-textarea font-mono overflow-visible resize-y text-sm px-0"
             placeholder="description..." />
         </div>
       </div>

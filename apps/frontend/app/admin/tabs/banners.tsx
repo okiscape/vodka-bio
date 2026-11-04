@@ -91,7 +91,7 @@ export default function BannersTab({ apiBaseUrl, headers, showStatus }: {
     <div className="w-full flex flex-col gap-6">
       <div className="flex flex-col gap-3">
         <input type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)}
-          className="text-sm" />
+          className="text-sm w-full" />
         <input placeholder="caption (alt text, optional)" value={caption} onChange={e => setCaption(e.target.value)}
           className="px-3 py-2 text-sm" />
         <input placeholder="href (URL, optional)" value={href} onChange={e => setHref(e.target.value)}

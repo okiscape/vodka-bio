@@ -80,7 +80,7 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
         placeholder="title"
         defaultValue={title}
         onChange={e => setTitle(e.target.value)}
-        className="text-3xl font-bold px-0"
+        className="admin-h1 font-bold px-0"
       />
 
       <input
@@ -107,21 +107,21 @@ export default function MainTab({ apiBaseUrl, headers, showStatus }: {
             className="text-xs opacity-40 hover:opacity-100">+ add link</button>
         </div>
         {links.map((link, i) => (
-          <div key={i} className="flex gap-3 items-center">
+          <div key={i} className="link-row">
             <input
               placeholder="name"
               value={link.name}
               onChange={e => updateLink(i, 'name', e.target.value)}
-              className="px-0 py-1 text-sm flex-1"
+              className="link-name px-0 py-1 text-sm min-w-0"
             />
             <input
               placeholder="url"
               value={link.href}
               onChange={e => updateLink(i, 'href', e.target.value)}
-              className="px-0 py-1 text-sm flex-[2]"
+              className="link-url px-0 py-1 text-sm min-w-0"
             />
             <button onClick={() => removeLink(i)}
-              className="text-xs opacity-40 hover:opacity-100">x</button>
+              className="link-remove text-xs opacity-40 hover:opacity-100">x</button>
           </div>
         ))}
       </div>

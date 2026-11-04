@@ -1,4 +1,196 @@
 .button-delete {
 	color: #B7312A
+}
 
+/* ---- Admin responsive layout ---- */
+
+.admin-login {
+	padding-top: 2.5rem;
+}
+
+.admin-token-input {
+	width: 100%;
+	max-width: 20rem;
+}
+
+.admin-shell {
+	padding-top: 2.5rem;
+}
+
+.admin-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	column-gap: 0.75rem;
+	row-gap: 0.25rem;
+	margin-bottom: 2rem;
+}
+
+.admin-tab {
+	padding: 0.25rem 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	white-space: nowrap;
+}
+
+.admin-tab.active {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
+}
+
+.admin-h1 {
+	width: 100%;
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+
+.admin-textarea {
+	width: 100%;
+	min-height: 10rem;
+}
+
+.admin-grid-gallery {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.75rem;
+}
+
+.admin-grid-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.75rem;
+}
+
+.rating-editor {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2rem;
+}
+
+.score-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.rating-description-preview {
+	width: 100%;
+	min-height: 8rem;
+}
+
+.rating-description-editor {
+	width: 100%;
+	min-height: 10rem;
+}
+
+.link-row {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.link-remove {
+	align-self: flex-end;
+}
+
+.shout-meta {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+@media (min-width: 640px) {
+	.admin-login,
+	.admin-shell {
+		padding-top: 0;
+	}
+
+	.admin-shell {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.admin-tabs {
+		column-gap: 1rem;
+	}
+
+	.admin-tab {
+		padding: 0.25rem 1.5rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+
+	.admin-tab.active {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+
+	.admin-h1 {
+		font-size: 1.875rem;
+		line-height: 2.25rem;
+	}
+
+	.admin-textarea {
+		min-height: 16rem;
+	}
+
+	.score-row {
+		gap: 0.75rem;
+	}
+
+	.link-row {
+		flex-direction: row;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.link-name {
+		flex: 1 1 0%;
+	}
+
+	.link-url {
+		flex: 2 1 0%;
+	}
+
+	.link-remove {
+		align-self: auto;
+	}
+
+	.shout-meta {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}
+
+@media (min-width: 768px) {
+	.admin-grid-gallery {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.admin-grid-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1024px) {
+	.admin-grid-gallery {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.rating-editor {
+		flex-direction: row;
+		gap: 4rem;
+		min-height: 24rem;
+	}
+
+	.rating-description-preview {
+		width: 42.5rem;
+	}
+
+	.rating-description-editor {
+		width: 42.5rem;
+		min-height: 16rem;
+	}
 }

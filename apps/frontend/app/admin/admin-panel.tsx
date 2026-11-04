@@ -60,10 +60,10 @@ export default function AdminPanel({ apiBaseUrl }: Props) {
 
   if (!token) {
     return (
-      <div className="flex flex-col items-center mt-5 gap-4">
+      <div className="flex flex-col items-center mt-5 gap-4 w-full px-2 admin-login">
         <p className="text-2xl">admin panel</p>
         <input
-          className="px-4 py-2 w-80 text-sm font-mono text-center"
+          className="px-4 py-2 text-sm font-mono text-center admin-token-input"
           type="password"
           placeholder="token"
           value={tokenInput}
@@ -76,21 +76,21 @@ export default function AdminPanel({ apiBaseUrl }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center w-full max-w-5xl px-4 self-center">
-      <div className="w-full flex items-center justify-between mb-6">
+    <div className="flex flex-col items-center w-full max-w-5xl self-center admin-shell">
+      <div className="w-full flex items-center justify-between gap-3 mb-6">
         <p className="text-2xl">admin panel</p>
-        <button className="text-xs opacity-40 hover:opacity-100" onClick={clearToken}>logout</button>
+        <button className="text-xs opacity-40 hover:opacity-100 shrink-0" onClick={clearToken}>logout</button>
       </div>
 
       {statusMsg && (
-        <p className={`mb-4 text-sm ${statusMsg.ok ? 'opacity-60' : 'opacity-40'}`}>{statusMsg.text}</p>
+        <p className={`mb-4 text-sm text-center ${statusMsg.ok ? 'opacity-60' : 'opacity-40'}`}>{statusMsg.text}</p>
       )}
 
-      <div className="flex gap-4 mb-8">
+      <div className="admin-tabs">
         {(['main', 'gallery', 'banners', 'ratings', 'shouts', 'projects'] as const).map(t => (
           <button
             key={t}
-            className={`px-6 py-1 ${tab === t ? 'text-xl' : 'opacity-40 hover:opacity-100'}`}
+            className={`admin-tab ${tab === t ? 'active' : 'opacity-40 hover:opacity-100'}`}
             onClick={() => setTab(t)}
           >
             {t.charAt(0).toUpperCase() + t.slice(1)}

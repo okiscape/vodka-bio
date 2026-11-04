@@ -102,7 +102,7 @@ export default function GalleryTab({ apiBaseUrl, headers, showStatus }: {
     <div className="w-full flex flex-col gap-6">
       <div className="flex flex-col gap-3">
         <input type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)}
-          className="text-sm" />
+          className="text-sm w-full" />
         <input placeholder="caption (optional)" value={caption} onChange={e => setCaption(e.target.value)}
           className="px-3 py-2 text-sm" />
         <button disabled={!file || loading} onClick={upload}
@@ -111,7 +111,7 @@ export default function GalleryTab({ apiBaseUrl, headers, showStatus }: {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="admin-grid-gallery">
         {items.map(item => (
           <div key={item.title} className="overflow-hidden h-min">
             <img src={`${apiBaseUrl}${item.source}`} className="w-full object-cover" />

@@ -77,11 +77,11 @@ export default function ShoutsTab({ apiBaseUrl, headers, showStatus }: {
               <div className="flex flex-col gap-2">
                 {unapproved.map(s => (
                   <div key={s.id} className="border border-[#fff1] p-3 flex flex-col gap-2">
-                    <div className="flex justify-between text-xs opacity-50">
-                      <span>{s.model_name || 'anonymous'}{s.details ? ` (${s.details})` : ''}</span>
-                      <span>{new Date(s.created_at).toLocaleString()}</span>
+                    <div className="shout-meta text-xs opacity-50">
+                      <span className="break-words">{s.model_name || 'anonymous'}{s.details ? ` (${s.details})` : ''}</span>
+                      <span className="shrink-0">{new Date(s.created_at).toLocaleString()}</span>
                     </div>
-                    <p className="text-sm">{s.content}</p>
+                    <p className="text-sm break-words">{s.content}</p>
                     <div className="flex gap-3">
                       <button onClick={() => accept(s.id)}
                         className="text-xs opacity-60 hover:opacity-100">accept</button>
@@ -100,11 +100,11 @@ export default function ShoutsTab({ apiBaseUrl, headers, showStatus }: {
               <div className="flex flex-col gap-2">
                 {approved.map(s => (
                   <div key={s.id} className="border border-[#fff1] p-3 flex flex-col gap-2">
-                    <div className="flex justify-between text-xs opacity-50">
-                      <span>{s.model_name || 'anonymous'}{s.details ? ` (${s.details})` : ''}</span>
-                      <span>{new Date(s.created_at).toLocaleString()}</span>
+                    <div className="shout-meta text-xs opacity-50">
+                      <span className="break-words">{s.model_name || 'anonymous'}{s.details ? ` (${s.details})` : ''}</span>
+                      <span className="shrink-0">{new Date(s.created_at).toLocaleString()}</span>
                     </div>
-                    <p className="text-sm">{s.content}</p>
+                    <p className="text-sm break-words">{s.content}</p>
                     <div className="flex gap-3">
                       <button onClick={() => remove(s.id)}
                         className="text-xs opacity-40 hover:opacity-100">delete</button>
