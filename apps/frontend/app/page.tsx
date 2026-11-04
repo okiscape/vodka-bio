@@ -7,6 +7,7 @@ import ShoutBox from "./components/shoutBox";
 import Features from "./components/featuresDisplay"
 import { UmamiScript } from "./components/umamiScript";
 import Otoring from "./components/otoring";
+import Donates from "./components/donates";
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -32,17 +33,19 @@ async function App() {
    <Header/>
    <div className="flex flex-col items-center mb-10 mt-55">
     <div className="flex flex-wrap justify-center items-center gap-10">
-      <video src="/videos/spinning.mkv" autoPlay loop className="spinningvideo" />
-      <TabSelector lastUpdate={lastUpdateProps}
+     <video src="/videos/spinning.mkv" autoPlay loop className="spinningvideo" />
+     <TabSelector lastUpdate={lastUpdateProps}
       senkoReferral={process.env.SENKODIGITAL_REFERRAL ?? ""}
       githubRepoUrl={process.env.GITHUB_REPO_URL ?? ""}
       apiBaseUrl={apiBaseUrl}
-      />
+     />
     </div>
     <Otoring/>
    </div>
 
    <Features apiBaseUrl={apiBaseUrl} />
+
+   <Donates apiBaseUrl={apiBaseUrl} />
 
    <ShoutBox apiBaseUrl={apiBaseUrl} />
 
