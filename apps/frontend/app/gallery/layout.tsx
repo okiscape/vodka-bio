@@ -1,6 +1,7 @@
 import { UmamiScript } from "../components/umamiScript";
 import Header from "../components/header";
 import "../globals.css";
+import "./gallery.css";
 
 export default function RootLayout({
   children,

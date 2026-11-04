@@ -47,25 +47,6 @@ h1 .aka {
   opacity: 0.5;
 }
 
-.shitpostgallery {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.shitpostgallery.content {
-  column-count: 3;
-  column-gap: 0.5rem;
-  width: 100%;
-}
-
-.shitpostgallery.content img {
-  max-width: 350px;
-  display: block;
-  margin-bottom: 0.5rem;
-  break-inside: avoid;
-}
-
 .mylinks {
   display: flex;
   column-gap: 10px;
@@ -128,12 +109,6 @@ h1 .aka {
   align-items: center;
 }
 
-@media (max-width: 1200px) {
-  .shitpostgallery.content {
-    column-count: 2;
-  }
-}
-
 @media (max-width: 900px) {
   .spinningvideo {
     width: 340px;
@@ -142,13 +117,8 @@ h1 .aka {
   .textcontainer {
     width: 320px;
   }
-  .shitpostgallery.content {
-    column-count: 3;
-  }
-  .shitpostgallery.content img { max-width: 200px;}
 }
 
-/* Мобильный */
 @media (max-width: 600px) {
   .spinningvideo {
     width: 220px;
@@ -171,11 +141,6 @@ h1 .aka {
   .mylinks {
     justify-content: center;
   }
-
-  .shitpostgallery.content {
-    column-count: 2;
-  }
-  .shitpostgallery.content img { max-width: 200px;}
 
   .nowplaying-container {
     justify-content: center;

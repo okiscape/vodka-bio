@@ -1,0 +1,45 @@
+.shitpostgallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.shitpostgallery.content {
+  column-count: 3;
+  column-gap: 0.5rem;
+  width: 100%;
+}
+
+.shitpostgallery.content img {
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  break-inside: avoid;
+}
+
+@media (max-width: 900px) {
+  .shitpostgallery.content {
+    column-count: 2;
+  }
+
+  .shitpostgallery.content img {
+    max-width: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .shitpostgallery {
+    padding: 0.5rem;
+  }
+
+  .shitpostgallery.content {
+    column-gap: 0.25rem;
+  }
+
+  .shitpostgallery.content img {
+    margin-bottom: 0.25rem;
+  }
+}

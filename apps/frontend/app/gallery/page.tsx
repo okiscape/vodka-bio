@@ -1,9 +1,7 @@
 export const dynamic = 'force-dynamic'
 
-export default async function App(props: { searchParams: Promise<{ showHidden?: string }> }) {
- const searchParams = await props.searchParams
- const qs = searchParams.showHidden === 'true' ? '?showHidden=true' : ''
- const _shitpostsFetch = await fetch(`${process.env.API_BASEURL}/gallery${qs}`)
+export default async function App() {
+ const _shitpostsFetch = await fetch(`${process.env.API_BASEURL}/gallery`)
  const galleryFetch = await _shitpostsFetch.json() as {items:{source: string, caption: string, display?: boolean}[]}
 
  return (
