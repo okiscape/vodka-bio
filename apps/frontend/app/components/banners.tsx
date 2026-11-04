@@ -28,7 +28,7 @@ export default async function Banners({apiBaseUrl}: Props) {
       }
     </div>}
     <div className="flex flex-col items-center gap-2">
-     <p>badgess whichs i find pretty</p>
+     <p>badgess/banners/buttons that i find pretty</p>
      <div className="userbanner-space">
       {banners.filter((item) =>
        !item.href?.includes("https://oki.vodka/"))

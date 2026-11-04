@@ -48,7 +48,7 @@ export default function FeaturesDisplay({apiBaseUrl}: Props) {
                     className="preview" />
                 <div className="content">
                     <h1>My projects</h1>
-                    <p>i also like to host something</p>
+                    <p>i also like to create stuff</p>
                     <div className="buttons">
                         {loading && <p>trying to load projects...</p>}
                         {!loading && projects.map(
@@ -61,7 +61,7 @@ export default function FeaturesDisplay({apiBaseUrl}: Props) {
                                 </a>
                         )}
                     </div>
-                    {contactUrl && <p>you want me to work with you? <a href={contactUrl}><u>please, contact me!</u></a></p>}
+                    {contactUrl && <a href={contactUrl}><u>let's work together!</u></a>}
                 </div>
             </div>
         </div>

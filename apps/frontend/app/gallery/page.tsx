@@ -7,7 +7,7 @@ export default async function App() {
  return (
   <div className="flex flex-col items-center">
    <p className="mt-30 mb-5 text-4xl">my shitpost gallery!</p>
-   <p className="mb-10 text-lg content-center">here i "post" any pictures that i found funny asf of decided it to place here</p>
+   <p className="mb-10 text-lg content-center">here i "post" any pictures that i find funny asf or decided to place here</p>
     {galleryFetch && <div className="shitpostgallery content">
      {galleryFetch.items.map((item, i) => (<img key={i} src={`${process.env.API_BASEURL}${item.source}`} title={item.caption}/>))}
      </div>

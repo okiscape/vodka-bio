@@ -92,7 +92,7 @@ export default function ShoutBox({ apiBaseUrl }: Props) {
                     <textarea value={shoutContent}
                         placeholder="output (required)"
                         onChange={e => setShoutContent(e.target.value)} />
-                    <p className="text-center opacity-50">your shout will be displayed after approval</p>
+                    <p className="text-center opacity-50">your shout will be displayed on the right after its approval</p>
                     <button onClick={createShout}>shout!</button>
                 </div>
                 <div className="list">
