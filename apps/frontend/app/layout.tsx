@@ -12,15 +12,13 @@ export default function RootLayout({
     >
     <head>
      <title>okiscape</title>
-     <link rel="icon" href="/face.png" />
-     {/*<meta name="og:image" content="/face.png" />*/}
+     <link rel="icon" href="/icon.png" />
      <meta name="og:title" content="okiscape" />
-     <meta name="og:description" content="hello! this is my personal website. i use arch btw" />
-     {/*<meta name="og:site_name" content="FUCK YOU!!! sorry" />*/}
-     <meta name="theme-color" content="#2d46b1" />
+     <meta name="og:description" content="hello! this is my personal website" />
+     <meta name="theme-color" content="#B1B1B1" />
 
      <meta name="twitter:title" content="okiscape" />
-     <meta name="twitter:description" content="i use arch btw" />
+     <meta name="twitter:description" content="fullstack developer & digital warrior" />
     </head>
     {children}
    </html>

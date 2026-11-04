@@ -30,16 +30,16 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const imgUrl = item.banner
 
   return {
-    title,
+    title: "okiscape: " + title,
 		description,
     openGraph: {
-      title,
+      title: "okiscape: " + title,
       description,
       images: imgUrl ? [{ url: imgUrl }] : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: "okiscape: " + title,
 			description,
       creator: "okiscape",
       images: imgUrl ? [imgUrl] : [],

@@ -129,8 +129,11 @@ export default function RatingsList({ apiBaseUrl }: { apiBaseUrl: string }) {
 									{item.tags && <p className="summary">[{item.tags?.join("] [")}]</p>}
 
 	                <div className="footer">
-	                  <p>Avr. rating: {(item.scores.map((val, _, __) => (val.value))
-	                    .reduce((partialSum, a) => partialSum + a, 0) / item.scores.length).toFixed(1)} </p>
+                    { item.scores.length > 0 ?
+                      <p>Total rating: {
+                      (item.scores.map((val, _, __) => (val.value))
+                        .reduce((partialSum, a) => partialSum + a, 0) / item.scores.length).toFixed(1)
+                    }</p> : ""}
 	                  <p>{fmtDate(item.created_at)}</p>
 	                </div>
 	              </div>
