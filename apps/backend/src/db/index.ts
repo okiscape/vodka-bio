@@ -108,6 +108,19 @@ export async function initDb() {
       );
     `)
 
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS donate_methods (
+        id SERIAL PRIMARY KEY,
+        group_name TEXT NOT NULL,
+        method_name TEXT NOT NULL,
+        content TEXT NOT NULL,
+        qrtip TEXT NOT NULL DEFAULT '',
+        description TEXT NOT NULL DEFAULT '',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `)
+
     console.log('Database initialized')
   } finally {
     client.release()
