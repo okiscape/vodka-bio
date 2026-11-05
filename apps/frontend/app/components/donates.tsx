@@ -113,6 +113,8 @@ export default function Donates({ apiBaseUrl }: Props) {
     [previous]
   )
 
+  if (methods.length == 0) return
+
   function selectMethod(group: MethodGroup, method: DonateMethod) {
     const key = `${group.name}:${method.method_name}`
     if (selected?.key === key) return

@@ -4,16 +4,20 @@ type Props = {
 }
 
 export default async function Banners({apiBaseUrl}: Props) {
- const _apiFetch = await fetch(`${apiBaseUrl}/banners`)
- const apiFetch = await _apiFetch.json()
- if (!apiFetch.items) return
-
- const banners: { title: string, caption?: string, source: string, href?: string }[] = apiFetch.items.map((banner: { title: string, caption?: string, source: string, href?: string }) => ({
-  title: banner.title,
-  source: banner.source,
-  href: banner.href,
-  caption: banner.caption
- }))
+ let banners: { title: string, caption?: string, source: string, href?: string }[] | null = null
+ try {
+  const _apiFetch = await fetch(`${apiBaseUrl}/banners`)
+  const apiFetch = await _apiFetch.json()
+  if (apiFetch.items) {
+   banners = apiFetch.items.map((banner: { title: string, caption?: string, source: string, href?: string }) => ({
+    title: banner.title,
+    source: banner.source,
+    href: banner.href,
+    caption: banner.caption
+   }))
+  }
+ } catch { return null }
+ if (!banners) return
 
  const mybanners = banners ? banners.filter((item) => item.href?.includes("oki.vodka")) : null
 

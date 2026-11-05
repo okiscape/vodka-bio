@@ -8,6 +8,7 @@ import Features from "./components/featuresDisplay"
 import { UmamiScript } from "./components/umamiScript";
 import Otoring from "./components/otoring";
 import Donates from "./components/donates";
+import { redirect } from "next/navigation";
 
 const montserratUnderline = Montserrat_Underline({
   subsets: ['latin'],
@@ -16,15 +17,19 @@ const montserratUnderline = Montserrat_Underline({
 export const dynamic = 'force-dynamic'
 
 async function App() {
- const _lastupdateFetch = await fetch(`${process.env.API_BASEURL}/last_update`, {
-  next: { revalidate: 3600*6 },
- })
- const lastupdateJson = await _lastupdateFetch.json() as { ok: boolean, lastUpdates: { frontend: number, backend: number } }
-
- const lastUpdateProps = {
-   frontend: lastupdateJson.lastUpdates.frontend,
-   backend: lastupdateJson.lastUpdates.backend,
- }
+  let lastupdateJson: { ok: boolean, lastUpdates: { frontend: number, backend: number } } | null = null
+  try {
+    const _lastupdateFetch = await fetch(`${process.env.API_BASEURL}/last_update`, {
+      cache: "no-store",
+    })
+    lastupdateJson = await _lastupdateFetch.json() as { ok: boolean, lastUpdates: { frontend: number, backend: number } }
+  } catch {
+    return redirect("/unavailable")
+  }
+  const lastUpdateProps = {
+    frontend: lastupdateJson?.lastUpdates?.frontend ?? 0,
+    backend: lastupdateJson?.lastUpdates?.backend ?? 0,
+  }
 
  const apiBaseUrl = process.env.API_BASEURL ?? ""
 

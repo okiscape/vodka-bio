@@ -10,6 +10,7 @@ export default function RootLayout({
     <html
       lang="en"
       className="h-full antialiased"
+		suppressHydrationWarning
 		>
 			<head>
 				<title>okiscape: admin</title>
