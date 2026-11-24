@@ -1,7 +1,19 @@
+"use client"
+
+import { useEffect } from "react"
 import { redirect } from "next/navigation"
 import "./unavailable.css"
 
 export default async function Unavailable() {
+  useEffect(() => {
+    async function checkPing() {
+      const res = await fetch("https://oki.vodka/api/ping")
+      const data = await res.json()
+      if (data.ok === true) {redirect("/")}
+    }
+    checkPing()
+  }, [])
+
   return (
   <body>
     <div className="unavailable">
@@ -13,5 +25,5 @@ export default async function Unavailable() {
       </div>
     </div>
   </body>
- )
+  )
 }
