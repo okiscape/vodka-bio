@@ -4,4 +4,5 @@
   font-weight: 500;
   font-family: "Montserrat Underline", "Montserrat";
   text-shadow: 0 -1 5 #000;
+  z-index: 999;
 }

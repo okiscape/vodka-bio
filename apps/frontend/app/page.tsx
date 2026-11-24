@@ -37,8 +37,8 @@ async function App() {
  return (
   <body className={montserratUnderline.className}>
    <Header/>
-   <div className="flex flex-col items-center mb-10 mt-55">
-    <div className="flex flex-wrap justify-center items-center gap-10">
+   <div className="hero">
+    <div className="content">
      <video src="/videos/spinning.mkv" autoPlay loop className="spinningvideo" />
      <TabSelector lastUpdate={lastUpdateProps}
       senkoReferral={process.env.SENKODIGITAL_REFERRAL ?? ""}

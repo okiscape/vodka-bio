@@ -1,11 +1,24 @@
 .spinningvideo {
   width: 600px;
+  margin-right: -50px;
+}
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+
+  > .content {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 900px) {
   .spinningvideo {
     width: 340px;
   }
+  .hero{margin-top: 50px;}
 }
 
 @media (max-width: 600px) {

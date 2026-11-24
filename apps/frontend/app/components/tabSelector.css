@@ -1,22 +1,21 @@
-.textcontainer {
+.tab-selector {
   width: 550px;
   max-width: 100%;
-}
 
-.textcontainer .description {
-  color: rgba(255, 255, 255, 0.6);
-}
+  > .contentselector {
+    display: flex;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.6);
 
-.contentselector {
-  display: flex;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.6);
+    > .active {
+      color: #fff;
+    }
+  }
+  .tab {
+    backdrop-filter: blur(5px);
+    .description {color: rgba(255, 255, 255, 0.6);}
+  }
 }
-
-.contentselector .active {
-  color: #fff;
-}
-
 @media (max-width: 900px) {
   .textcontainer {
     width: 320px;

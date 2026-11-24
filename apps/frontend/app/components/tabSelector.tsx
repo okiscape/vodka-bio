@@ -23,7 +23,7 @@ export default function TabSelector({ lastUpdate, senkoReferral, githubRepoUrl, 
   ]
 
 return (
-  <div className="textcontainer">
+  <div className="tab-selector">
     <div className="contentselector">
       <p className='opacity-70'>about: </p>
       {tabs.map((tab) => (

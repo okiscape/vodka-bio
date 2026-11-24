@@ -20,7 +20,7 @@ function formatDate(timestamp: number) {
 
 export default function AboutSite({ lastUpdate, senkoReferral, githubRepoUrl }: Props) {
   return (
-    <div>
+    <div className='tab'>
       <h1>about this site</h1>
       <div className={`description ${montserrat.className}`}>
         <p>this website written using next.js and react</p>

@@ -4,7 +4,11 @@ h1 .aka {
   font-weight: normal;
   opacity: 0.5;
 }
-
+.tab {
+  justify-content: space-between;
+  display: flex; flex-direction: column;
+  height: 85%;
+}
 .mylinks {
   display: flex;
   column-gap: 10px;
