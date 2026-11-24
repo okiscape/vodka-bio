@@ -1,0 +1,15 @@
+.spinningvideo {
+  width: 600px;
+}
+
+@media (max-width: 900px) {
+  .spinningvideo {
+    width: 340px;
+  }
+}
+
+@media (max-width: 600px) {
+  .spinningvideo {
+    width: 220px;
+  }
+}

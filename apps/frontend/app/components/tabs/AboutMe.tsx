@@ -3,6 +3,7 @@
 import { Montserrat } from 'next/font/google'
 import { useEffect, useState } from 'react'
 import ScrobbleLiveActivity from "../liveActivity"
+import './AboutMe.css'
 
 const montserrat = Montserrat({
   weight: '400',

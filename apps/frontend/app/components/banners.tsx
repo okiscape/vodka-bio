@@ -1,4 +1,6 @@
 import CopyBanner from "./copyBanner";
+import "./banners.css";
+
 type Props = {
  apiBaseUrl: string
 }

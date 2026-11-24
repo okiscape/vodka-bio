@@ -1,0 +1,18 @@
+h1 .aka {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  opacity: 0.5;
+}
+
+.mylinks {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 900px) {
+  .mylinks {
+    justify-content: center;
+  }
+}

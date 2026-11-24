@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./page.css";
 import { Montserrat_Underline } from 'next/font/google'
 import TabSelector from "./components/tabSelector"
 import Banners from "./components/banners"

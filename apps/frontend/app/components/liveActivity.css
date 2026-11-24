@@ -1,0 +1,27 @@
+.nowplaying-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 20px;
+  width: 100%;
+
+  > .cover {
+    max-width: 80px;
+  }
+
+  > .title {
+    font-size: 1.1rem;
+  }
+
+  > .artist {
+    opacity: 0.7;
+    font-family: "Montserrat";
+  }
+}
+
+@media (max-width: 600px) {
+  .nowplaying-container {
+    justify-content: center;
+    text-align: center;
+  }
+}

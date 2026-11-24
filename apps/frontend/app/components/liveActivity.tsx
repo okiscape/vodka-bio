@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Montserrat } from 'next/font/google'
+import "./liveActivity.css"
 
 type Props = {
  apiBaseUrl: string

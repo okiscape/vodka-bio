@@ -1,3 +1,5 @@
+import "./header.css";
+
 const roots = [
  {name: "main", href: "/"},
  {name: "gallery", href: "/gallery"},

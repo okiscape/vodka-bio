@@ -1,0 +1,34 @@
+.textcontainer {
+  width: 550px;
+  max-width: 100%;
+}
+
+.textcontainer .description {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.contentselector {
+  display: flex;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.contentselector .active {
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .textcontainer {
+    width: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .textcontainer {
+    width: 100%;
+    text-align: center;
+  }
+  .contentselector {
+    justify-content: center;
+  }
+}

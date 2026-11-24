@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import AboutMe from './tabs/AboutMe'
 import AboutSite from './tabs/AboutSite'
+import "./tabSelector.css"
 
 type Props = {
  lastUpdate: { backend: number, frontend: number }
