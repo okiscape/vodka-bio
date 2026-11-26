@@ -24,5 +24,7 @@
 @media (max-width: 600px) {
   .spinningvideo {
     width: 220px;
+    margin-right: 0;
   }
+  .hero > .content {width: 100%; flex-direction: column; align-items: center;}
 }
